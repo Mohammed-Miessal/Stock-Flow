@@ -14,13 +14,13 @@
                 <div class="container px-6 mx-auto grid">
 
                     <h2 class="my-6 text-2xl  text-gray-700 dark:text-gray-200">
-                        Create User
+                        Update User
                     </h2>
 
                     <div class="w-full overflow-hidden rounded-lg shadow-xs">
                         <div class="w-full overflow-x-auto">
 
-                            <form action="{{ route('user.update' , $user->id) }}" method="post">
+                            <form action="{{ route('user.update', $user->id) }}" method="post">
                                 @csrf
                                 @method('put')
 
@@ -59,7 +59,7 @@
                                                 Password
                                             </span>
 
-                                            <input type="password" name="password" 
+                                            <input type="password" name="password"
                                                 class="block mt-1 mr-4 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                                 style="width: 80%" />
 
@@ -71,14 +71,18 @@
                                                 Roles
                                             </span>
 
+
                                             <select name="role_id" required
                                                 class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                                                 style="width: 80%">
                                                 @foreach ($roles as $role)
-                                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                                    <option value="{{ $role->id }}"
+                                                        @if ($role->id == $role_id) selected @endif>
+                                                        {{ $role->name }}</option>
                                                 @endforeach
-
                                             </select>
+
+
 
                                         </label>
                                     </div>
@@ -95,7 +99,11 @@
                                                 class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                                                 style="width: 80%">
                                                 @foreach ($permissions as $permission)
-                                                    <option value="{{ $permission->id }}">{{ $permission->name }}</option>
+                                                    <option value="{{ $permission->id }}"
+                                                        @if ($permission->id == $permission_id) selected @endif>
+                                                        {{ $permission->name }}</option>
+
+                                                    >{{ $permission->name }}</option>
                                                 @endforeach
                                             </select>
 
