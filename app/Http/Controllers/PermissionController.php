@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Permission;
-use App\Services\RoleService;
 use App\Http\Requests\StorePermissionRequest;
 use App\Http\Requests\UpdatePermissionRequest;
 use App\Services\PermissionService;
@@ -24,7 +23,6 @@ class PermissionController extends Controller
     public function index()
     {
         $permissions = $this->permission->index();
-        dd($permissions);
         return view('permissions', compact('permissions'));
     }
 
