@@ -73,7 +73,6 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = $this->user->show($id);
-        // return view ('' , compact('user' => user));
     }
 
     /**
@@ -84,7 +83,9 @@ class UserController extends Controller
         $roles = $this->role->index();
         $permissions = $this->permission->index();
         $user = $this->user->show($id);
-        return view('chapters.User.edit', compact('roles', 'permissions', 'user'));
+        $role_id = optional($user->roles->first())->id;
+        $permission_id = optional($user->permissions->first())->id;
+        return view('chapters.User.edit', compact('roles', 'permissions', 'user', 'role_id', 'permission_id'));
     }
 
     /**
@@ -115,7 +116,6 @@ class UserController extends Controller
     {
         $this->user->delete($id);
 
-        // return  redirect()->route('user.index');
         return redirect()->back();
     }
 }
