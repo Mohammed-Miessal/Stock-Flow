@@ -429,7 +429,7 @@ video {
     border-color: #63b3ed
 }
 
-.form-multiselect {
+/* .form-multiselect {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -446,7 +446,7 @@ video {
     outline: none;
     box-shadow: 0 0 0 3px rgba(66, 153, 225, .5);
     border-color: #63b3ed
-}
+} */
 
 .form-select {
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a0aec0'%3E%3Cpath d='M15.3 9.3a1 1 0 011.4 1.4l-4 4a1 1 0 01-1.4 0l-4-4a1 1 0 011.4-1.4l3.3 3.29 3.3-3.3z'/%3E%3C/svg%3E");
@@ -2147,4 +2147,36 @@ print and (-ms-high-contrast:none) {
     border-bottom-width: 1px;
     border-bottom-color: #898989;
 
+}
+
+.w-\[80px\] {
+    width: 80%;
+}
+  
+
+.gap-x-3{
+    column-gap: 14px;
+}
+
+
+@media (min-width: 1024px) {
+    .lg\:grid {
+        display: grid;
+    }
+}
+
+@media (min-width: 1024px) {
+    .lg\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .lg\:gap-4 {
+        gap: 1rem/* 16px */;
+    }
+}
+
+.pl-16 {
+    padding-left: 4rem/* 64px */;
 }
