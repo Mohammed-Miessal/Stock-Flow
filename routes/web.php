@@ -20,7 +20,7 @@ use App\Http\Controllers\UserController;
 // Home page :
 Route::get('/home', function () {
     return view('index');
-});
+})->name('home');
 
 Route::get('/', function () {
     return view('auth.login');
