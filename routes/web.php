@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -38,8 +39,10 @@ Route::get('/reset-password', function () {
 
 
 // Route::group(['middleware' => ['role:Super Admin,Admin']], function () {
-    Route::resources(['user' => UserController::class]);
-    Route::resources(['category' => CategoryController::class]);
-    Route::resources(['subcategory' => SubcategoryController::class]);
+Route::resources(['user' => UserController::class]);
+Route::resources(['category' => CategoryController::class]);
+Route::resources(['subcategory' => SubcategoryController::class]);
+Route::resources(['unit' => UnitController::class]);
+
 
 // });
