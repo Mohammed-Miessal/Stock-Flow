@@ -17,6 +17,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Interfaces\RoleInterface', 'App\Repositories\RoleRepository');
         $this->app->bind('App\Interfaces\PermissionInterface', 'App\Repositories\PermissionRepository');
         $this->app->bind('App\Interfaces\UserInterface', 'App\Repositories\UserRepository');
+        $this->app->bind('App\Interfaces\CategoryInterface', 'App\Repositories\CategoryRepository');
+        $this->app->bind('App\Interfaces\SubcategoryInterface', 'App\Repositories\SubcategoryRepository');
     }
 
     /**
