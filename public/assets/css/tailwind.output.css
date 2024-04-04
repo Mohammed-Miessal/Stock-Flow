@@ -2139,13 +2139,15 @@ print and (-ms-high-contrast:none) {
 
 
 #titleMobile {
-    font-family: "Kalam", cursive;
+    font-family: "Great Vibes", cursive;
     font-weight: 400;
     font-style: normal;
     font-size: 20px;
     color: rgb(var(--tw-text-opacity));
-    border-bottom-width: 1px;
-    border-bottom-color: #898989;
+    /* border-bottom-width: 1px;
+    border-bottom-color: #898989; */
+    display: flex;
+    gap: 10px
 
 }
 
@@ -2179,4 +2181,10 @@ print and (-ms-high-contrast:none) {
 
 .pl-16 {
     padding-left: 4rem/* 64px */;
+}
+
+
+.text-red-500 {
+    --tw-text-opacity: 1;
+    color: rgb(239 68 68 / var(--tw-text-opacity));
 }
