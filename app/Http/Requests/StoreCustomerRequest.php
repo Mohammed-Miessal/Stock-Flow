@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSupplierRequest extends FormRequest
+class StoreCustomerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,17 +21,13 @@ class UpdateSupplierRequest extends FormRequest
      */
     public function rules(): array
     {
-        $supplierId = $this->supplier->id; // get the supplier id
-    
         return [
-            'name' => 'required|string|max:255|unique:suppliers,name,' . $supplierId,
-            'email' => 'required|email|unique:suppliers,email,' . $supplierId,
+            'name' => 'required|string|max:255|unique:customers',
+            'email' => 'required|email|unique:customers',
             'phone' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'status' => 'required|string|in:active,inactive',
-            'country' => 'required|string|max:255|unique:suppliers,country,' . $supplierId,
-            'city' => 'required|string|max:255|unique:suppliers,city,' . $supplierId,
+            'country' => 'required|string|max:255|unique:customers',
+            'city' => 'required|string|max:255|unique:customers',
         ];
     }
-    
 }

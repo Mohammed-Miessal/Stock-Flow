@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
@@ -45,5 +46,7 @@ Route::resources(['category' => CategoryController::class]);
 Route::resources(['subcategory' => SubcategoryController::class]);
 Route::resources(['unit' => UnitController::class]);
 Route::resources(['supplier' => SupplierController::class]);
+Route::resources(['customer' => CustomerController::class]);
+
 
 // });
