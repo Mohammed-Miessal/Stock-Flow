@@ -14,7 +14,7 @@
                 <div class="container px-6 mx-auto grid">
 
                     <h2 class="my-6 text-2xl  text-gray-700 dark:text-gray-200">
-                        Suplliers List
+                        Supllier List
                     </h2>
                     <div class="flex justify-end mb-6">
                         <a href="{{ route('supplier.create') }}">
