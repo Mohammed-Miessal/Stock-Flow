@@ -34,7 +34,6 @@
                                         <th class="px-4 py-3">email</th>
                                         <th class="px-4 py-3">phone</th>
                                         <th class="px-4 py-3">address</th>
-                                        <th class="px-4 py-3">status</th>
                                         <th class="px-4 py-3">contry</th>
                                         <th class="px-4 py-3">city</th>
                                         <th class="px-4 py-3">actions</th>
@@ -54,9 +53,6 @@
                                             </td>
                                             <td class="px-4 py-3 text-sm">
                                                 {{ $customer->address }}
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                {{ $customer->status }}
                                             </td>
                                             <td class="px-4 py-3 text-sm">
                                                 {{ $customer->country }}
