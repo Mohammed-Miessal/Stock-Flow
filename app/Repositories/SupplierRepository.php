@@ -13,12 +13,12 @@ class SupplierRepository implements SupplierInterface
         return Supplier::all();
     }
 
-    public function find($id)
+    public function show($id)
     {
         return Supplier::find($id);
     }
 
-    public function create($data)
+    public function store($data)
     {
         return Supplier::create($data);
     }

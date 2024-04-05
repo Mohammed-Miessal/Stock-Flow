@@ -8,34 +8,39 @@ class SupplierService implements SupplierInterface
 {
     protected $supplier;
 
-    public function __construct(Supplier $supplier)
+    public function __construct(SupplierInterface $supplier)
     {
         $this->supplier = $supplier;
     }
 
     public function index()
     {
-        return Supplier::all();
+        $suppliers = $this->supplier->index();
+        return $suppliers;
     }
 
     public function show($id)
     {
-        return Supplier::find($id);
+        $supplier = $this->supplier->show($id);
+        return $supplier;
     }
 
     public function store($data)
     {
-        return Supplier::create($data);
+        $supplier = $this->supplier->store($data);
+        return $supplier;
     }
 
     public function update($id, $data)
     {
-        return Supplier::find($id)->update($data);
+        $supplier = $this->supplier->update($id, $data);
+        return $supplier;
     }
 
     public function delete($id)
     {
-        return Supplier::find($id)->delete();
+        $supplier = $this->supplier->delete($id);
+        return $supplier;
     }
    
 }
