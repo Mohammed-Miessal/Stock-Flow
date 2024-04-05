@@ -8,33 +8,38 @@ class UserService implements UserInterface
 {
     protected $user;
 
-    public function __construct(User $user)
+    public function __construct(UserInterface $user)
     {
         $this->user = $user;
     }
 
     public function index()
     {
-        return User::all();
+        $users = $this->user->index();
+        return $users ;
     }
 
     public function show($id)
     {
-        return User::find($id);
+        $user = $this->user->show($id);
+        return $user;
     }
 
     public function store($data)
     {
-        return User::create($data);
+        $user = $this->user->store($data);
+        return $user;
     }
 
     public function update($id, $data)
     {
-        return User::find($id)->update($data);
+        $user = $this->user->update($id, $data);
+        return $user;
     }
 
     public function delete($id)
     {
-        return User::find($id)->delete();
+        $user = $this->user->delete($id);
+        return $user;
     }
 }
