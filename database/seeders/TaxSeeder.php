@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Tax;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class TaxSeeder extends Seeder
 {
@@ -12,6 +13,12 @@ class TaxSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        for ($i = 1; $i <= 10; $i++) {
+            Tax::create([
+                'name' => "Tax $i",
+                'rate' => rand(1, 20), 
+                'status' => 'active'
+            ]);
+        }
     }
 }
