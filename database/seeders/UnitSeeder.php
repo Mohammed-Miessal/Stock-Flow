@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Unit;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UnitSeeder extends Seeder
 {
@@ -12,6 +13,8 @@ class UnitSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        for ($i = 1; $i <= 10; $i++) {
+            Unit::create(['name' => "Unit $i"]);
+        }
     }
 }
