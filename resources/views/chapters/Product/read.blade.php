@@ -14,13 +14,13 @@
                 <div class="container px-6 mx-auto grid">
 
                     <h2 class="my-6 text-2xl  text-gray-700 dark:text-gray-200">
-                        Tax List
+                        Product List
                     </h2>
                     <div class="flex justify-end mb-6">
-                        <a href="{{ route('tax.create') }}">
+                        <a href="{{ route('product.create') }}">
                             <button
                                 class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                                Add Tax
+                                Add Product
                             </button>
                         </a>
                     </div>
@@ -30,33 +30,64 @@
                                 <thead>
                                     <tr
                                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                        <th class="px-4 py-3">image</th>
                                         <th class="px-4 py-3">name</th>
-                                        <th class="px-4 py-3">rate (%)</th>
+                                        <th class="px-4 py-3">reference</th>
+                                        <th class="px-4 py-3">quantity</th>
+                                        <th class="px-4 py-3">unit</th>
+                                        <th class="px-4 py-3">price</th>
                                         <th class="px-4 py-3">status</th>
+                                        <th class="px-4 py-3">category</th>
+                                        <th class="px-4 py-3">tax</th>
+                                        <th class="px-4 py-3">supplier</th>
+                                        <th class="px-4 py-3">subcategorie</th>
                                         <th class="px-4 py-3">actions</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                                    @foreach ($taxes as $tax)
+                                    @foreach ($products as $product)
                                         <tr class="text-gray-700 dark:text-gray-400">
 
                                             <td class="px-4 py-3 text-sm">
-                                                {{ $tax->name }}
+                                                <img class="object-cover w-11 h-11"
+                                                    src="{{ asset('storage/' . $product->image) }}" alt="product image"
+                                                    loading="lazy" />
                                             </td>
-
                                             <td class="px-4 py-3 text-sm">
-                                                {{ $tax->rate }} %
+                                                {{ $product->name }}
                                             </td>
-
                                             <td class="px-4 py-3 text-sm">
-                                                {{ $tax->status }}
+                                                {{ $product->reference }}
                                             </td>
-
+                                            <td class="px-4 py-3 text-sm">
+                                                {{ $product->quantity }}
+                                            </td>
+                                            <td class="px-4 py-3 text-sm">
+                                                {{ $product->unit->name }}
+                                            </td>
+                                            <td class="px-4 py-3 text-sm">
+                                                {{ $product->price }}
+                                            </td>
+                                            <td class="px-4 py-3 text-sm">
+                                                {{ $product->status }}
+                                            </td>
+                                            <td class="px-4 py-3 text-sm">
+                                                {{ $product->category->name }}
+                                            </td>
+                                            <td class="px-4 py-3 text-sm">
+                                                {{ $product->tax->rate }} %
+                                            </td>
+                                            <td class="px-4 py-3 text-sm">
+                                                {{ $product->supplier->name }}
+                                            </td>
+                                            <td class="px-4 py-3 text-sm">
+                                                {{ $product->subcategory->name }}
+                                            </td>
                                             <!-- Action -->
                                             <td class="px-4 py-3">
                                                 <div class="flex items-center space-x-4 text-sm">
                                                     {{-- Update --}}
-                                                    <a href="{{ route('tax.edit', $tax->id) }}">
+                                                    <a href="{{ route('product.edit', $product->id) }}">
                                                         <button
                                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                             aria-label="Edit">
@@ -69,7 +100,8 @@
                                                         </button>
                                                     </a>
                                                     {{-- Delete --}}
-                                                    <form action="{{ route('tax.destroy', $tax->id) }}" method="post">
+                                                    <form action="{{ route('product.destroy', $product->id) }}"
+                                                        method="post">
                                                         @csrf
                                                         @method('DELETE')
 

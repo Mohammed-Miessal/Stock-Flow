@@ -14,4 +14,8 @@ class Tax extends Model
         'rate',
         'status',
     ];
+
+    public function products(){
+        return $this->belongsToMany(Product::class);
+    }
 }

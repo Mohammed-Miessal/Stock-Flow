@@ -2,19 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\Unit;
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
-class UnitSeeder extends Seeder
+class ProductSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        for ($i = 1; $i <= 10; $i++) {
-            Unit::create(['name' => "Unit $i"]);
-        }
+        //
     }
 }
