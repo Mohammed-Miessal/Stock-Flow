@@ -18,4 +18,8 @@ class Supplier extends Model
         'country',
         'city',
     ];
+
+    public function products(){
+        return $this->belongsToMany(Product::class);
+    }
 }
