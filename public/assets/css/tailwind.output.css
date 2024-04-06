@@ -2188,3 +2188,15 @@ print and (-ms-high-contrast:none) {
     --tw-text-opacity: 1;
     color: rgb(239 68 68 / var(--tw-text-opacity));
 }
+
+.w-11 {
+    width: 2.75rem/* 44px */;
+}
+
+.h-11 {
+    height: 2.75rem/* 44px */;
+}
+
+.overflow-x-visible {
+    overflow-x: visible;
+}
