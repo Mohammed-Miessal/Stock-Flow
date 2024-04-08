@@ -2,9 +2,11 @@
 @section('content')
     <div class="flex h-screen bg-gray-50 dark:bg-gray-800" :class="{ 'overflow-hidden': isSideMenuOpen }">
 
+        @include('components.aside')
+
         <div class="flex flex-col flex-1 w-full">
             <!-- header -->
-            @include('components.header-show-product')
+            @include('components.header')
 
             <main class="h-full overflow-y-auto">
                 <div class="container px-6 mx-auto grid">
@@ -13,7 +15,8 @@
                         <div class="container px-5 py-24 mx-auto">
                             <div class="lg:w-4/5 mx-auto flex flex-wrap">
 
-                                <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded "
+                                <img alt="ecommerce"
+                                    class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded "
                                     src="{{ asset('storage/' . $product->image) }}">
 
                                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
@@ -78,9 +81,11 @@
                                             class="ml-auto text-gray-900 dark:text-gray-400">{{ $product->supplier->name }}</span>
                                     </div>
                                     <div class="flex mt-6  ">
-                                        <span class="text-gray-800  dark:text-white text-xl title-font tracking-widest">Price</span>
                                         <span
-                                            class=" ml-auto title-font font-medium text-2xl text-gray-900 dark:text-gray-200">{{ $product->price }} DH</span>
+                                            class="text-gray-800  dark:text-white text-xl title-font tracking-widest">Price</span>
+                                        <span
+                                            class=" ml-auto title-font font-medium text-2xl text-gray-900 dark:text-gray-200">{{ $product->price }}
+                                            DH</span>
 
                                     </div>
                                 </div>
