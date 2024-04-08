@@ -75,7 +75,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $this->product->show($product->id);
+        $product =  $this->product->show($product->id);
+        // dd( $product);
+        return view('chapters.Product.show', compact('product'));
     }
 
     /**
