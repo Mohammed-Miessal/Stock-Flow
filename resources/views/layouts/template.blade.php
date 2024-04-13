@@ -18,14 +18,39 @@
     <link rel="stylesheet" href="{{ asset('assets/icons/fonts/remixicon.css') }}">
 
     <!--===============  salect ===============-->
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
 
-        
 </head>
 
-<body>
+<body >
 
     @yield('content')
 
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            new TomSelect("#select-product", {
+                maxItems: 1,
+                create: false, // Pour empêcher l'ajout d'options personnalisées
+                // sortField: {
+                //     field: "text",
+                //     direction: "asc"
+                // }
+            });
+        });
+
+        $(document).ready(function() {
+            new TomSelect("#customer-name", {
+                maxItems: 1,
+                create: false, // Pour empêcher l'ajout d'options personnalisées
+                sortField: {
+                    field: "text",
+                    direction: "asc"
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
