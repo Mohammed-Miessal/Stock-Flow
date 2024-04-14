@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
@@ -51,6 +52,7 @@ Route::resources(['supplier' => SupplierController::class]);
 Route::resources(['customer' => CustomerController::class]);
 Route::resources(['tax' => TaxController::class]);
 Route::resources(['product' => ProductController::class]);
+Route::resources(['order' => OrderController::class]);
 
 
 // });

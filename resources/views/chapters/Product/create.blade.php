@@ -121,7 +121,7 @@
 
                                                 <option value="active">Active</option>
                                                 <option value="out of stock">Out of stock</option>
-                                                <option value="Archived">Archived</option>
+                                                <option value="archived">Archived</option>
                                                 <option value="on pre-order">On pre-order</option>
 
                                             </select>
