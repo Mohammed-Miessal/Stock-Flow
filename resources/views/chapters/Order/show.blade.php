@@ -5,15 +5,27 @@
         @include('components.aside')
 
 
+
+
         <div class="flex flex-col flex-1 w-full dark:bg-gray-800">
 
 
             @include('components.header')
 
+
+
             <main class="h-full overflow-y-auto">
 
                 <section class="py-20 bg-white dark:bg-gray-800">
                     <div class="max-w-5xl mx-auto  bg-white dark:bg-gray-800">
+                        <div class="flex justify-end mb-6">
+
+                            <button id="printButton"
+                                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                                Generate the Order
+                            </button>
+
+                        </div>
                         <article class="overflow-hidden">
                             <div class="bg-[white] rounded-b-md">
                                 <div class="p-9">
@@ -177,4 +189,9 @@
         </main>
     </div>
     </div>
+    <script>
+        document.getElementById('printButton').addEventListener('click', function() {
+            window.print(); // Appeler la fonction d'impression native du navigateur
+        });
+    </script>
 @endsection
