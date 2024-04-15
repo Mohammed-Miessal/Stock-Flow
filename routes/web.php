@@ -53,6 +53,4 @@ Route::resources(['customer' => CustomerController::class]);
 Route::resources(['tax' => TaxController::class]);
 Route::resources(['product' => ProductController::class]);
 Route::resources(['order' => OrderController::class]);
-
-Route::get('order/{order}/generate', [OrderController::class, 'generate'])->name('order.generate');
 // });
