@@ -14,8 +14,17 @@
 
                 <section class="py-20 bg-white dark:bg-gray-800">
                     <div class="max-w-5xl mx-auto  bg-white dark:bg-gray-800">
+                        <div class="flex justify-end mb-6">
+
+                            <button id="printButton"
+                                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                                Generate the Order
+                            </button>
+
+                        </div>
                         <article class="overflow-hidden">
                             <div class="bg-[white] rounded-b-md">
+
                                 <div class="p-9">
                                     <div class="space-y-6 text-slate-700">
                                         <a class="text-lg dark:text-white " href="#" id='title'>
@@ -42,7 +51,6 @@
                                                 <p class="text-sm font-bold text-slate-700 dark:text-white ">Order Number
                                                 </p>
                                                 <p>{{ $order->uuid }}</p>
-
                                             </div>
                                             <div class="text-sm font-light text-slate-500">
                                                 <p class="text-sm font-bold text-slate-700 dark:text-white ">Date</p>
@@ -57,6 +65,7 @@
                                     <div class="flex flex-col mx-0 mt-8">
 
                                         <table class="min-w-full divide-y divide-slate-500">
+
                                             <thead>
                                                 <tr>
                                                     <th scope="col"
@@ -80,6 +89,7 @@
                                                     </th>
                                                 </tr>
                                             </thead>
+
                                             <tbody class="product-table">
                                                 @foreach ($order->products as $product)
                                                     <tr class="border-b border-slate-200">
@@ -102,6 +112,7 @@
                                                     </tr>
                                                 @endforeach
                                             </tbody>
+
                                             <tfoot>
                                                 <tr>
                                                     <th scope="row" colspan="3"
@@ -162,6 +173,7 @@
 
                                                 </tr>
                                             </tfoot>
+
                                         </table>
 
                                     </div>
@@ -177,4 +189,10 @@
         </main>
     </div>
     </div>
+    <script>
+        // Appeler la fonction d'impression native du navigateur
+        document.getElementById('printButton').addEventListener('click', function() {
+            window.print(); 
+        });
+    </script>
 @endsection
