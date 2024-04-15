@@ -5,14 +5,10 @@
         @include('components.aside')
 
 
-
-
         <div class="flex flex-col flex-1 w-full dark:bg-gray-800">
 
 
             @include('components.header')
-
-
 
             <main class="h-full overflow-y-auto">
 
@@ -28,6 +24,7 @@
                         </div>
                         <article class="overflow-hidden">
                             <div class="bg-[white] rounded-b-md">
+
                                 <div class="p-9">
                                     <div class="space-y-6 text-slate-700">
                                         <a class="text-lg dark:text-white " href="#" id='title'>
@@ -54,7 +51,6 @@
                                                 <p class="text-sm font-bold text-slate-700 dark:text-white ">Order Number
                                                 </p>
                                                 <p>{{ $order->uuid }}</p>
-
                                             </div>
                                             <div class="text-sm font-light text-slate-500">
                                                 <p class="text-sm font-bold text-slate-700 dark:text-white ">Date</p>
@@ -69,6 +65,7 @@
                                     <div class="flex flex-col mx-0 mt-8">
 
                                         <table class="min-w-full divide-y divide-slate-500">
+
                                             <thead>
                                                 <tr>
                                                     <th scope="col"
@@ -92,6 +89,7 @@
                                                     </th>
                                                 </tr>
                                             </thead>
+
                                             <tbody class="product-table">
                                                 @foreach ($order->products as $product)
                                                     <tr class="border-b border-slate-200">
@@ -114,6 +112,7 @@
                                                     </tr>
                                                 @endforeach
                                             </tbody>
+
                                             <tfoot>
                                                 <tr>
                                                     <th scope="row" colspan="3"
@@ -174,6 +173,7 @@
 
                                                 </tr>
                                             </tfoot>
+
                                         </table>
 
                                     </div>
@@ -190,8 +190,9 @@
     </div>
     </div>
     <script>
+        // Appeler la fonction d'impression native du navigateur
         document.getElementById('printButton').addEventListener('click', function() {
-            window.print(); // Appeler la fonction d'impression native du navigateur
+            window.print(); 
         });
     </script>
 @endsection

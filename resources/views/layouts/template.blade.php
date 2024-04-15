@@ -4,20 +4,26 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> &nbsp;</title>
+    <title>EcoStock</title>
+
+    <!--===============  CSS ===============-->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind.output.css') }}" />
+
+    <!--===============  Icons ===============-->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="{{ asset('assets/js/init-alpine.js') }}"></script>
+
+    <!--===============  Chart.js ===============-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
     <script src="{{ asset('assets/js/charts-lines.js') }}" defer></script>
     <script src="{{ asset('assets/js/charts-pie.js') }}" defer></script>
-    {{-- @vite('resources/css/app.css') --}}
+
     <!--=============== REMIXICONS ICONS ===============-->
     <link rel="stylesheet" href="{{ asset('assets/icons/fonts/remixicon.css') }}">
 
-    <!--===============  salect ===============-->
+    <!--===============  select ===============-->
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
 
@@ -35,6 +41,10 @@
 
             #aside {
                 display: none;
+            }
+
+            @page {
+                margin: 0;
             }
         }
     </style>
