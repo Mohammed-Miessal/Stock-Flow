@@ -1,17 +1,16 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SubcategoryController;
-use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TaxController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\SubcategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,4 +52,5 @@ Route::resources(['customer' => CustomerController::class]);
 Route::resources(['tax' => TaxController::class]);
 Route::resources(['product' => ProductController::class]);
 Route::resources(['order' => OrderController::class]);
+Route::resources(['invoice' => InvoiceController::class]);
 // });

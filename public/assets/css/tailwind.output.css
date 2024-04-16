@@ -3005,3 +3005,7 @@ Show Page
     padding-left: 2.25rem/* 36px */;
     padding-right: 2.25rem/* 36px */;
 }
+
+.pb-9 {
+    padding-bottom: 2.25rem/* 36px */;
+}

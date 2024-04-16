@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid')->unique();
+            $table->uuid('invoice_number')->unique();
             $table->foreignId('customer_id')->constrained('customers')->onUpdate('cascade')->onDelete('cascade');
-            $table->date('date');
+            $table->date('invoice_date');
+            $table->date('due_date');
             $table->decimal('total', 10, 2);
-            $table->enum('status', ['paid', 'unpaid', 'partial' ,'declined'])->default('unpaid');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('invoices');
     }
 };
