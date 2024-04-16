@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('date');
             $table->decimal('total', 10, 2);
             $table->enum('status', ['paid', 'unpaid', 'partial' ,'declined'])->default('unpaid');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
