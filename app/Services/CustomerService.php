@@ -1,4 +1,5 @@
 <?php 
+
 namespace App\Services;
 
 use App\Interfaces\CustomerInterface;
@@ -14,26 +15,31 @@ class CustomerService
 
     public function index()
     {
-        return $this->customer->index();
+        $customers = $this->customer->index();
+        return $customers ;
     }
 
     public function show($id)
     {
-        return $this->customer->show($id);
+        $customer = $this->customer->show($id);
+        return $customer ;
     }
 
     public function store($data)
     {
-        return $this->customer->store($data);
+        $customer = $this->customer->store($data);
+        return $customer ;
     }
 
-    public function update($id, $data)
+    public function update($id,$data)
     {
-        return $this->customer->update($id, $data);
+        $customer = $this->customer->update($id,$data);
+        return $customer ;
     }
 
     public function delete($id)
     {
-        return $this->customer->delete($id);
+        $customer = $this->customer->delete($id);
+        return $customer ;
     }
 }
