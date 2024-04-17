@@ -60,17 +60,36 @@
             new TomSelect("#select-product", {
                 maxItems: 1,
                 create: false, // Pour empêcher l'ajout d'options personnalisées
-                // sortField: {
-                //     field: "text",
-                //     direction: "asc"
-                // }
+                sortField: {
+                    field: "text",
+                    direction: "asc"
+                }
             });
         });
 
         $(document).ready(function() {
             new TomSelect("#customer-name", {
                 maxItems: 1,
-                create: false, // Pour empêcher l'ajout d'options personnalisées
+                sortField: {
+                    field: "text",
+                    direction: "asc"
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            new TomSelect("#permission_id", {
+                maxItems: 5,
+                sortField: {
+                    field: "text",
+                    direction: "asc"
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            new TomSelect("#role_id", {
+                maxItems: 2,
                 sortField: {
                     field: "text",
                     direction: "asc"
