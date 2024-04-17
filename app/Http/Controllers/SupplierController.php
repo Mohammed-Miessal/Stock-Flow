@@ -66,7 +66,7 @@ class SupplierController extends Controller
      */
     public function update(UpdateSupplierRequest $request, Supplier $supplier)
     {
-         $data = $request->validated();
+        $data = $request->validated();
         $this->supplier->update($supplier->id, $data);
         return redirect()->route('supplier.index');
     }
