@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTaxRequest;
 use App\Http\Requests\UpdateTaxRequest;
-use App\Interfaces\TaxInterface;
 use App\Models\Tax;
 use App\Services\TaxService;
 
