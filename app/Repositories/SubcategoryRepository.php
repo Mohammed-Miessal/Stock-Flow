@@ -1,35 +1,49 @@
 <?php
-namespace App\Repositories;
 
+namespace App\Repositories;
 
 use App\Models\Subcategory;
 use App\Interfaces\SubcategoryInterface;
 
+
 class SubcategoryRepository implements SubcategoryInterface
 {
+    protected $subcategory;
+
+    public function __construct(Subcategory $subcategory)
+    {
+        $this->subcategory = $subcategory;
+    }
+
     public function index()
     {
-        return Subcategory::all();
-    }
-
-    public function store(array $data)
-    {
-        return Subcategory::create($data);
-    }
-
-    public function update(array $data, $id)
-    {
-        $subcategory = Subcategory::find($id);
-        return $subcategory->update($data);
-    }
-
-    public function delete($id)
-    {
-        return Subcategory::destroy($id);
+        $subcategories = $this->subcategory::all();
+        return $subcategories;
     }
 
     public function show($id)
     {
-        return Subcategory::find($id);
+        $subcategory = $this->subcategory::find($id);
+        return $subcategory;
+    }
+
+    public function store($data)
+    {
+        $subcategory = $this->subcategory::create($data);
+        return $subcategory;
+    }
+
+    public function update($id,$data)
+    {
+        $subcategory = $this->subcategory::find($id);
+        $subcategory->update($data);
+        return $subcategory;
+    }
+
+    public function delete($id)
+    {
+        $subcategory = $this->subcategory::find($id);
+        $subcategory->delete();
+        return $subcategory;
     }
 }
