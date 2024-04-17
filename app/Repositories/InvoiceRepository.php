@@ -1,8 +1,10 @@
 <?php 
+
 namespace App\Repositories;
 
 use App\Models\Invoice;
 use App\Interfaces\InvoiceInterface;
+
 
 class InvoiceRepository implements InvoiceInterface
 {
@@ -32,12 +34,6 @@ class InvoiceRepository implements InvoiceInterface
         return $invoice;    
     }
 
-    // public function update($data, $id)
-    // {
-    //     $invoice = $this->invoice::find($id);
-    //     $invoice->update($data , $id);
-    //     return $invoice;
-    // }
     public function update($id, $data){
         $invoice = $this->invoice::find($id);
         $invoice->update($data);

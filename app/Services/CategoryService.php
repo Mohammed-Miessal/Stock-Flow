@@ -1,4 +1,5 @@
 <?php 
+
 namespace App\Services;
 
 use App\Interfaces\CategoryInterface;
@@ -14,27 +15,31 @@ class CategoryService
 
     public function index()
     {
-        return $this->category->index();
+        $categories = $this->category->index();
+        return $categories;
     }
 
     public function show($id)
     {
-        return $this->category->show($id);
+        $category = $this->category->show($id);
+        return $category ;
     }
 
     public function store($data)
     {
-        return $this->category->store($data);
+        $category = $this->category->store($data);
+        return $category ;
     }
 
-    public function update($id, $data)
+    public function update($id,$data)
     {
-        return $this->category->update($id, $data);
+        $category = $this->category->update($id,$data);
+        return $category ;
     }
 
     public function destroy($id)
     {
-        return $this->category->delete($id);
+        $category = $this->category->delete($id);
+        return $category ;
     }
 }
-

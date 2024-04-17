@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Ramsey\Uuid\Uuid;
-use Illuminate\Http\Request;
 use App\Services\OrderService;
 use App\Services\ProductService;
 use App\Services\CustomerService;
@@ -32,7 +31,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = $this->order->index();
-        return view('chapters.Order.read', compact('orders' ));
+        return view('chapters.Order.read', compact('orders'));
     }
 
     /**
@@ -70,7 +69,6 @@ class OrderController extends Controller
         $data['uuid'] = $uuid;
         
         // Créer une commande avec les données validées
-        // $order = Order::create($data);
         $order = $this->order->store($data);
         
         // Récupérer la chaîne JSON représentant les produits depuis la requête
@@ -81,7 +79,7 @@ class OrderController extends Controller
         
         // Parcourir chaque produit et l'attacher à la commande avec la quantité
         foreach ($productsArray as $product) {
-            // Ajouter la relation many-to-many entre la commande et le produit avec la quantité
+        // Ajouter la relation many-to-many entre la commande et le produit avec la quantité
             $order->products()->attach($product['product_id'], ['quantity' => $product['quantity'], 'total_per_product' => $product['total']]);
         }
         
@@ -90,15 +88,12 @@ class OrderController extends Controller
     }
     
     
-    
     /**
      * Display the specified resource.
      */
     public function show(Order $order)
     {
-        // $order = $order->load('products');
         $order = $this->order->show($order->id);
-        // Pass the $data array to your view if needed
         return view('chapters.Order.show', compact('order'));
     }
     
@@ -110,7 +105,6 @@ class OrderController extends Controller
     {
         $customers = $this->customer->index();
         $products = $this->product->index();
-        // $order = $order->load('products');
         $order = $this->order->show($order->id);
         // Préparez les prix des produits dans un tableau associatif
         $productPrices = [];
@@ -137,7 +131,6 @@ class OrderController extends Controller
             $data['uuid'] = $uuid;
         
             // Mettre à jour la commande avec les données validées
-            // $order->update($data);
             $order = $this->order->update($order->id , $data );
 
             // Récupérer la chaîne JSON représentant les produits depuis la requête
@@ -151,14 +144,12 @@ class OrderController extends Controller
 
             // Parcourir chaque produit et l'attacher à la commande avec la quantité
             foreach ($productsArray as $product) {
-                // Ajouter la relation many-to-many entre la commande et le produit avec la quantité
+            // Ajouter la relation many-to-many entre la commande et le produit avec la quantité
                 $order->products()->attach($product['product_id'], ['quantity' => $product['quantity'], 'total_per_product' => $product['total']]);
             }
 
             // Rediriger vers la page de création de commande
             return redirect()->route('order.index');
-
-
     }
 
     /**

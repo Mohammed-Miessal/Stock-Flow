@@ -9,7 +9,6 @@ use App\Services\ProductService;
 use App\Services\CustomerService;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class InvoiceController extends Controller
 {
@@ -42,14 +41,13 @@ class InvoiceController extends Controller
         $customers = $this->customer->index();
         $products = $this->product->index();
 
-        // Préparez les prix des produits dans un tableau associatif
+        // Préparez les prix et les noms des produits dans un tableau associatif
         $productPrices = [];
         $productNames = [];
         foreach ($products as $product) {
             $productPrices[$product->id] = $product->price;
             $productNames[$product->id] = $product->name;      
         }
-
         return view('chapters.Invoice.create' , compact('customers' , 'products' , 'productPrices' , 'productNames'));
     }
 
@@ -68,15 +66,15 @@ class InvoiceController extends Controller
 
         $invoice = $this->invoice->store($data);
 
-           // Récupérer la chaîne JSON représentant les produits depuis la requête
+        // Récupérer la chaîne JSON représentant les produits depuis la requête
         $productsJson = $request->input('products');
         
-           // Décoder la chaîne JSON en un tableau associatif
+        // Décoder la chaîne JSON en un tableau associatif
         $productsArray = json_decode($productsJson, true);
 
-            // Parcourir chaque produit et l'attacher à la commande avec la quantité
+        // Parcourir chaque produit et l'attacher à la commande avec la quantité
         foreach ($productsArray as $product) {
-            // Ajouter la relation many-to-many entre la commande et le produit avec la quantité
+        // Ajouter la relation many-to-many entre la commande et le produit avec la quantité
             $invoice->products()->attach($product['product_id'], ['quantity' => $product['quantity'], 'total_per_product' => $product['total']]);
         }
 
@@ -89,7 +87,6 @@ class InvoiceController extends Controller
     public function show(Invoice $invoice)
     {
         $invoice = $this->invoice->show($invoice->id);
-        // dd($invoice->products);
         return view('chapters.Invoice.show', compact('invoice'));
     }
 
