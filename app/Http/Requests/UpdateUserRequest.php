@@ -23,15 +23,12 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            // 'email' => 'required|string|email|max:255|unique:users,email',
             'email' => 'required|string|email|max:100|unique:users,email,' . $this->route('user'),
             'password' => 'required|string|min:6',
-            // 'role_id' => 'required|array',
-            // 'role_id.*' => 'required|integer|exists:roles,id',
-            'role_id' => 'required|integer|exists:roles,id',
-            // 'permission_id' => 'required|array',
-            // 'permission_id.*' => 'required|integer|exists:permissions,id',
-            'permission_id' => 'required|integer|exists:permissions,id',
+            'role_id' => 'required|array',
+            'role_id.*' => 'required|integer|exists:roles,id',
+            'permission_id' => 'required|array',
+            'permission_id.*' => 'required|integer|exists:permissions,id',
         ];
     }
 }
