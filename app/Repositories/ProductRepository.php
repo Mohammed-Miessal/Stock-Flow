@@ -1,33 +1,49 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Product;
 use App\Interfaces\ProductInterface;
 
+
 class ProductRepository implements ProductInterface
 {
+    protected $product;
+
+    public function __construct(Product $product)
+    {
+        $this->product = $product;
+    }
+
     public function index()
     {
-        return Product::all();
+        $products = $this->product::all();
+        return $products;
     }
 
     public function store($data)
     {
-        return Product::create($data);
+        $product = $this->product::create($data);
+        return $product;
     }
 
     public function show($id)
     {
-        return Product::find($id);
+        $product = $this->product::find($id);
+        return $product;
     }
 
-    public function update($data, $id)
+    public function update($id,$data)
     {
-        return Product::find($id)->update($data);
+        $product = $this->product::find($id);
+        $product->update($data);
+        return $product;
     }
-
+    
     public function delete($id)
     {
-        return Product::find($id)->delete();
+        $product = $this->product::find($id);
+        $product->delete();
+        return $product;
     }
 }

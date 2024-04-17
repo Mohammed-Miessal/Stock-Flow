@@ -59,7 +59,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('products', 'public');
@@ -76,7 +76,6 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $product =  $this->product->show($product->id);
-        // dd( $product);
         return view('chapters.Product.show', compact('product'));
     }
 
@@ -110,7 +109,7 @@ class ProductController extends Controller
             $data['image'] = $imagePath;
         }
 
-        $this->product->update($data, $product->id);
+        $this->product->update($product->id,$data );
 
         return redirect()->route('product.index');
     }
