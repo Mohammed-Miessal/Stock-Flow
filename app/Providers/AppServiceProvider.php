@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Interfaces\ProductInterface', 'App\Repositories\ProductRepository');
         $this->app->bind('App\Interfaces\OrderInterface', 'App\Repositories\OrderRepository');
         $this->app->bind('App\Interfaces\InvoiceInterface', 'App\Repositories\InvoiceRepository');
+        $this->app->bind('App\Interfaces\AuthInterface', 'App\Repositories\AuthRepository');
     }
 
     /**
@@ -45,10 +46,10 @@ class AppServiceProvider extends ServiceProvider
 
         Blade::directive('role', function ($role) {
             return "<?php if(auth()->check() && auth()->user()->hasRole({$role})) : ?>";
-        });
+});
 
-        Blade::directive('endrole', function ($role) {
-            return "<?php endif; ?>";
-        });
-    }
+Blade::directive('endrole', function ($role) {
+return "<?php endif; ?>";
+});
+}
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaxController;
 use App\Http\Controllers\UnitController;
@@ -24,14 +25,11 @@ use App\Http\Controllers\SubcategoryController;
 */
 
 
-// Home page :
-Route::get('/home', function () {
-    return view('index');
-})->name('home');
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
+
 
 Route::get('/forget-password', function () {
     return view('auth.forget-password');
@@ -43,14 +41,24 @@ Route::get('/reset-password', function () {
 
 
 // Route::group(['middleware' => ['role:Super Admin,Admin']], function () {
-Route::resources(['user' => UserController::class]);
-Route::resources(['category' => CategoryController::class]);
-Route::resources(['subcategory' => SubcategoryController::class]);
-Route::resources(['unit' => UnitController::class]);
-Route::resources(['supplier' => SupplierController::class]);
-Route::resources(['customer' => CustomerController::class]);
-Route::resources(['tax' => TaxController::class]);
-Route::resources(['product' => ProductController::class]);
-Route::resources(['order' => OrderController::class]);
-Route::resources(['invoice' => InvoiceController::class]);
-// });
+    Route::middleware(['auth'])->group(function () {
+        Route::resources([
+            'user' => UserController::class,
+            'category' => CategoryController::class,
+            'subcategory' => SubcategoryController::class,
+            'unit' => UnitController::class,
+            'supplier' => SupplierController::class,
+            'customer' => CustomerController::class,
+            'tax' => TaxController::class,
+            'product' => ProductController::class,
+            'order' => OrderController::class,
+            'invoice' => InvoiceController::class,
+        ]);
+    
+        Route::get('/home', function () {
+            return view('index');
+        })->name('home');
+    
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    });
+    
