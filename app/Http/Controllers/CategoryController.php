@@ -51,6 +51,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $category = $this->category->show($category->id);
+        // here i can show the view of a specific category 
     }
 
     /**
