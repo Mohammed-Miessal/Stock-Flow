@@ -11,6 +11,7 @@ class UnitController extends Controller
 {
 
     protected $unit;
+
     public function __construct(UnitService $unit)
     {
         $this->unit = $unit;
@@ -56,7 +57,7 @@ class UnitController extends Controller
      */
     public function edit(Unit $unit)
     {
-        // $unit = $this->unit->show($unit->id);    
+        $unit = $this->unit->show($unit->id);    
         return view('chapters.Unit.edit', compact('unit'));
     }
 

@@ -15,26 +15,31 @@ class RoleService
 
     public function index()
     {
-        return $this->role->index();
+        $roles = $this->role->index();
+        return $roles;
     }
 
     public function show($id)
     {
-        return $this->role->show($id);
+        $role =  $this->role->show($id);
+        return $role;
     }
 
     public function store($data)
     {
-        return $this->role->store($data);
+        $role =  $this->role->store($data);
+        return $role;
     }
 
     public function update($id, $data)
     {
-        return $this->role->update($id, $data);
+        $role =  $this->role->update($id, $data);
+        return $role;
     }
 
     public function delete($id)
     {
-        return $this->role->delete($id);
+        $role =  $this->role->delete($id);
+        return $role;
     }
 }

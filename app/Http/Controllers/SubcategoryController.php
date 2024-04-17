@@ -64,7 +64,6 @@ class SubcategoryController extends Controller
     {
         $subcategory = $this->subcategory->show($subcategory->id);
         $categories = $this->category->index();
-
         return view('chapters.SubCategory.edit', compact('subcategory', 'categories'));
     }
 
@@ -74,7 +73,7 @@ class SubcategoryController extends Controller
     public function update(UpdateSubcategoryRequest $request, Subcategory $subcategory)
     {
         $data = $request->validated();
-        $this->subcategory->update($data , $subcategory->id);
+        $this->subcategory->update($subcategory->id,$data);
         return redirect()->route('subcategory.index');
     }
 

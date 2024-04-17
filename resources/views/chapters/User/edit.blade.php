@@ -72,12 +72,12 @@
                                             </span>
 
 
-                                            <select name="role_id" required
+                                            <select name="role_id[]" required multiple id="role_id"
                                                 class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                                                 style="width: 80%">
                                                 @foreach ($roles as $role)
                                                     <option value="{{ $role->id }}"
-                                                        @if ($role->id == $role_id) selected @endif>
+                                                        @if (in_array($role->id, $role_id)) selected @endif>
                                                         {{ $role->name }}</option>
                                                 @endforeach
                                             </select>
@@ -95,15 +95,14 @@
                                                 Permissions
                                             </span>
 
-                                            <select name="permission_id" required
+                                            <select name="permission_id[]" required id="permission_id" multiple
                                                 class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                                                 style="width: 80%">
                                                 @foreach ($permissions as $permission)
                                                     <option value="{{ $permission->id }}"
-                                                        @if ($permission->id == $permission_id) selected @endif>
-                                                        {{ $permission->name }}</option>
+                                                        @if (in_array($permission->id, $permission_id)) selected @endif>
 
-                                                    >{{ $permission->name }}</option>
+                                                        {{ $permission->name }}</option>
                                                 @endforeach
                                             </select>
 

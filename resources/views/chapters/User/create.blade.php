@@ -70,7 +70,7 @@
                                                 Roles
                                             </span>
 
-                                            <select name="role_id" required
+                                            <select name="role_id[]" required id="role_id" multiple 
                                                 class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                                                 style="width: 80%">
                                                 @foreach ($roles as $role)
@@ -90,7 +90,7 @@
                                                 Permissions
                                             </span>
 
-                                            <select name="permission_id" required
+                                            <select name="permission_id[]" required multiple id="permission_id"
                                                 class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                                                 style="width: 80%">
                                                 @foreach ($permissions as $permission)

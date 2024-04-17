@@ -1,12 +1,11 @@
 <?php 
+
 namespace App\Services;
 
 use App\Interfaces\ProductInterface;
-use App\Models\Product;
 
 class ProductService implements ProductInterface
 {
-  
     protected $product;
 
     public function __construct(ProductInterface $product)
@@ -16,27 +15,32 @@ class ProductService implements ProductInterface
 
     public function index()
     {
-        return $this->product->index();
+        $products = $this->product->index();
+        return $products ;
     }
 
     public function store($data)
     {
-        return $this->product->store($data);
+        $product = $this->product->store($data);
+        return $product ;
     }
 
     public function show($id)
     {
-        return $this->product->show($id);
+        $product =  $this->product->show($id);
+        return $product ;
     }
 
-    public function update($data , $id)
+    public function update($id,$data)
     {
-        return $this->product->update($data , $id);
+        $product =  $this->product->update($id,$data);
+        return $product ;
     }
 
     public function delete($id)
     {
-        return $this->product->delete($id);
+        $product =  $this->product->delete($id);
+        return $product ;
     }
 
 }
