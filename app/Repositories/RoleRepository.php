@@ -17,26 +17,33 @@ class RoleRepository implements RoleInterface
 
     public function index()
     {
-        return Role::all();
+        $roles = $this->role::all();
+        return $roles;
     }
 
     public function show($id)
     {
-        return Role::find($id);
+        $role = $this->role::find($id);
+        return $role;
     }
 
     public function store($data)
     {
-        return Role::create($data);
+        $role = $this->role::create($data);
+        return $role;
     }
 
     public function update($id, $data)
     {
-        return Role::find($id)->update($data);
+        $role = $this->role::find($id);
+        $role->update($data);
+        return $role;
     }
 
     public function delete($id)
     {
-        return Role::find($id)->delete();
+        $role = $this->role::find($id);
+        $role->delete();
+        return $role;
     }
 }

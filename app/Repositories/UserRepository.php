@@ -1,4 +1,5 @@
 <?php 
+
 namespace App\Repositories;
 
 use App\Models\User;
@@ -15,26 +16,33 @@ class UserRepository implements UserInterface
 
     public function index()
     {
-        return User::all();
+        $users = $this->user::all();
+        return $users;
     }
 
     public function show($id)
     {
-        return User::find($id);
+        $user = $this->user::find($id);
+        return $user;
     }
 
     public function store($data)
     {
-        return User::create($data);
+        $user = $this->user::create($data);
+        return $user;
     }
 
-    public function update($id, $data)
+    public function update($id,$data)
     {
-        return User::find($id)->update($data);
+        $user = $this->user::find($id);
+        $user->update($data);
+        return $user;
     }
 
     public function delete($id)
     {
-        return User::find($id)->delete();
+        $user = $this->user::find($id);
+        $user->delete();
+        return $user;
     }
 }

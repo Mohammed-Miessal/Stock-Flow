@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use App\Interfaces\PermissionInterface;
@@ -14,26 +15,31 @@ class PermissionService
 
     public function index()
     {
-        return $this->permission->index();
+        $permissions = $this->permission->index();
+        return  $permissions ;
     }
 
     public function show($id)
     {
-        return $this->permission->show($id);
+        $permission =  $this->permission->show($id);
+        return  $permission ;
     }
 
     public function store($data)
     {
-        return $this->permission->store($data);
+        $permission = $this->permission->store($data);
+        return  $permission ;
     }
 
     public function update($id, $data)
     {
-        return $this->permission->update($id, $data);
+        $permission =  $this->permission->update($id, $data);
+        return  $permission ;
     }
 
     public function delete($id)
     {
-        return $this->permission->delete($id);
+        $permission =  $this->permission->delete($id);
+        return  $permission ;
     }
 }

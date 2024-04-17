@@ -1,4 +1,5 @@
 <?php 
+
 namespace App\Services;
 
 use App\Interfaces\InvoiceInterface;
@@ -31,9 +32,9 @@ class InvoiceService
         return $invoice;    
     }
 
-    public function update($data, $id)
+    public function update($id,$data)
     {
-        $invoice = $this->invoice->update($data, $id);
+        $invoice = $this->invoice->update($id,$data);
         return $invoice;
     }
 

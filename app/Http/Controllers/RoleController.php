@@ -23,7 +23,6 @@ class RoleController extends Controller
     public function index()
     {
         $roles = $this->role->index();
-        dd($roles);
         return view('roles.index', compact('roles'));
     }
 

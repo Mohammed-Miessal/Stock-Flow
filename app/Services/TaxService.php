@@ -1,7 +1,7 @@
 <?php
+
 namespace App\Services;
 
-use App\Models\Tax;
 use App\Interfaces\TaxInterface;
 
 class TaxService implements TaxInterface
@@ -15,31 +15,31 @@ class TaxService implements TaxInterface
 
     public function index()
     {
-    $users = $this->tax->index();
-    return $users;
+    $taxes = $this->tax->index();
+    return $taxes;
     }
 
-    public function show(Tax $tax)
+    public function show($id)
     {
-        $user = $this->tax->show($tax);
-        return $user;
+        $tax = $this->tax->show($id);
+        return $tax;
     }
 
-    public function store(array $data)
+    public function store($data)
     {
-        $user = $this->tax->store($data);
-        return $user;
+        $tax = $this->tax->store($data);
+        return $tax;
     }
 
-    public function update(array $data, Tax $tax)
+    public function update($id,$data)
     {
-        $user = $this->tax->update($data, $tax);
-        return $user;
+        $tax = $this->tax->update($id,$data);
+        return $tax;
     }
 
-    public function delete(Tax $tax)
+    public function delete($id)
     {
-        $user = $this->tax->delete($tax);
-        return $user;
+        $tax = $this->tax->delete($id);
+        return $tax;
     }
 }

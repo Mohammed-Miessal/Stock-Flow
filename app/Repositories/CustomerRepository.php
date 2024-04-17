@@ -1,6 +1,6 @@
 <?php 
-namespace App\Repositories;
 
+namespace App\Repositories;
 
 use App\Models\Customer;
 use App\Interfaces\CustomerInterface;
@@ -8,31 +8,41 @@ use App\Interfaces\CustomerInterface;
 
 class CustomerRepository implements CustomerInterface
 {
+    protected $customer;
+
+    public function __construct(Customer $customer)
+    {
+        $this->customer = $customer;
+    }
+
     public function index()
     {
-        return Customer::all();
+        $customer = $this->customer::all();
+        return $customer;
     }
     
     public function show($id)
     {
-        return Customer::find($id);
+        $customer = $this->customer::find($id);
+        return $customer;
     }
 
     public function store($data)
     {
-        return Customer::create($data);
+        $customer = $this->customer::create($data);
+        return $customer;
     }
 
     public function update($id, $data)
     {
-        $customer = Customer::find($id);
+        $customer = $this->customer::find($id);
         $customer->update($data);
         return $customer;
     }
 
     public function delete($id)
     {
-        $customer = Customer::find($id);
+        $customer = $this->customer::find($id);
         $customer->delete();
         return $customer;
     }

@@ -1,7 +1,7 @@
 <?php 
+
 namespace App\Services;
 
-use App\Models\Supplier;
 use App\Interfaces\SupplierInterface;
 
 class SupplierService implements SupplierInterface
@@ -42,5 +42,4 @@ class SupplierService implements SupplierInterface
         $supplier = $this->supplier->delete($id);
         return $supplier;
     }
-   
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Unit;
@@ -6,28 +7,42 @@ use App\Interfaces\UnitInterface;
 
 class UnitRepository implements UnitInterface
 {
+    protected $unit;
+
+    public function __construct(Unit $unit)
+    {
+        $this->unit = $unit;
+    }
+
     public function index()
     {
-        return Unit::all();
+        $units = $this->unit::all();
+        return $units;
     }
 
     public function show($id)
     {
-        return Unit::find($id);
+        $unit = $this->unit::find($id);
+        return $unit;
     }
 
     public function create($data)
     {
-        return Unit::create($data);
+        $unit = $this->unit::create($data);
+        return $unit;
     }
 
-    public function update($id, $data)
+    public function update($id,$data)
     {
-        return Unit::find($id)->update($data);
+        $unit = $this->unit::find($id);
+        $unit->update($data);
+        return $unit;
     }
 
     public function delete($id)
     {
-        return Unit::find($id)->delete();
+        $unit = $this->unit::find($id);
+        $unit->delete();
+        return $unit;
     }
 }

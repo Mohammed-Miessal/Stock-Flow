@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Services\RoleService;
 use App\Services\UserService;
 use App\Services\PermissionService;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Helpers\Helper;
 
 class UserController extends Controller
 {
@@ -30,10 +28,6 @@ class UserController extends Controller
     public function index()
     {
         $users = $this->user->index();
-        $users->map(function ($user) {
-            $user->permissions_count = user_permissions_counts($user->id);
-            return $user;
-        });
         return view('chapters.User.read', compact('users'));
     }
 
@@ -53,7 +47,6 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $data = $request->validated();
-
 
         $user = $this->user->store([
             'name' => $data['name'],
@@ -82,9 +75,13 @@ class UserController extends Controller
     {
         $roles = $this->role->index();
         $permissions = $this->permission->index();
+
         $user = $this->user->show($id);
-        $role_id = optional($user->roles->first())->id;
-        $permission_id = optional($user->permissions->first())->id;
+
+        // Get the role and permission id of the user
+        $role_id = $user->roles->pluck('id')->toArray();
+        $permission_id = $user->permissions->pluck('id')->toArray();
+
         return view('chapters.User.edit', compact('roles', 'permissions', 'user', 'role_id', 'permission_id'));
     }
 
@@ -115,7 +112,6 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $this->user->delete($id);
-
-        return redirect()->back();
+        return  redirect()->route('user.index');
     }
 }

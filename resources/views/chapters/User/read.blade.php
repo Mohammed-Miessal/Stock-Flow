@@ -55,7 +55,9 @@
                                                         <p class="font-semibold">{{ $user->name }}</p>
                                                         @foreach ($user->roles as $role)
                                                             <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                                {{ $role->name }}</p>
+                                                                {{ $role->name }}
+                                                            </p>
+                                                          
                                                         @endforeach
                                                     </div>
                                                 </div>
@@ -66,9 +68,10 @@
                                             <td class="px-4 py-3 text-xs">
                                                 @foreach ($user->roles as $role)
                                                     <span
-                                                        class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                                                        class="px-4 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
                                                         {{ $role->name }}
                                                     </span>
+                                                    
                                                 @endforeach
                                             </td>
                                             <td class="px-4 py-3 text-sm">

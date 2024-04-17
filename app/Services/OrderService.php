@@ -1,7 +1,7 @@
 <?php
+
 namespace App\Services;
 
-use App\Models\Order;
 use App\Interfaces\OrderInterface;
 
 class OrderService
@@ -15,27 +15,35 @@ class OrderService
 
     public function index()
     {
-        return $this->order->index();
+        $orders = $this->order->index();
+        return $orders ;
     }
 
     public function show($id)
     {
-        return $this->order->show($id);
+        $order =  $this->order->show($id);
+        return $order ;
     }
 
     public function store($data)
     {
-        return $this->order->store($data);
+        $order =  $this->order->store($data);
+        return $order ;
+
     }
 
     public function update($id, $data)
     {
-        return $this->order->update($id, $data);
+        $order = $this->order->update($id, $data);
+        return $order ;
+
     }
 
     public function destroy($id)
     {
-        return $this->order->delete($id);
+        $order = $this->order->delete($id);
+        return $order ;
+
     }
 
 }

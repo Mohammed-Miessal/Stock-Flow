@@ -11,6 +11,7 @@ class CustomerController extends Controller
 {
 
     protected $customer;
+
     public function __construct(CustomerService $customer)
     {
         $this->customer = $customer;
@@ -76,6 +77,6 @@ class CustomerController extends Controller
     public function destroy(Customer $customer)
     {
         $this->customer->delete($customer->id);
-       return redirect()->route('customer.index');  
+        return redirect()->route('customer.index');  
     }
 }

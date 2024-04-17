@@ -1,4 +1,5 @@
 <?php 
+
 namespace App\Services;
 
 use App\Interfaces\SubcategoryInterface;
@@ -14,26 +15,31 @@ class SubcategoryService
 
     public function index()
     {
-        return $this->subcategory->index();
+        $subcategories = $this->subcategory->index();
+        return $subcategories ;
     }
 
     public function show($id)
     {
-        return $this->subcategory->show($id);
+        $subcategory = $this->subcategory->show($id);
+        return $subcategory ;
     }
 
     public function store($data)
     {
-        return $this->subcategory->store($data);
+        $subcategory = $this->subcategory->store($data);
+        return $subcategory ;
     }
 
-    public function update($id, $data)
+    public function update($id,$data)
     {
-        return $this->subcategory->update($id, $data);
+        $subcategory = $this->subcategory->update($id, $data);
+        return $subcategory ;
     }
 
     public function destroy($id)
     {
-        return $this->subcategory->delete($id);
+        $subcategory = $this->subcategory->delete($id);
+        return $subcategory ;
     }
 }

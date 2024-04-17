@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Tax;
@@ -6,28 +7,42 @@ use App\Interfaces\TaxInterface;
 
 class TaxRepository implements TaxInterface
 {
+    protected $tax;
+
+    public function __construct(Tax $tax)
+    {
+        $this->tax = $tax;
+    }
+
     public function index()
     {
-        return Tax::all();
+        $taxes = $this->tax::all();
+        return $taxes;
     }
 
-    public function show(Tax $tax)
+    public function show($id)
     {
-        return Tax::find($tax);
+        $tax = $this->tax::find($id);
+        return $tax;
     }
 
-    public function store(array $data)
+    public function store($data)
     {
-        return Tax::create($data);
+        $tax = $this->tax::create($data);
+        return $tax;
     }
 
-    public function update(array $data, Tax $tax)
+    public function update($id,$data)
     {
-        return $tax->update($data);
+        $tax = $this->tax::find($id);
+        $tax->update($data);
+        return $tax;
     }
 
-    public function delete(Tax $tax)
+    public function delete($id)
     {
-        return $tax->delete();
+        $tax = $this->tax::find($id);
+        $tax->delete();
+        return $tax;
     }
 }

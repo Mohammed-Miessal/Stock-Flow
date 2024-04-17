@@ -1,7 +1,10 @@
 <?php 
+
 namespace App\Repositories;
+
 use App\Models\Permission;
 use App\Interfaces\PermissionInterface;
+
 
 class PermissionRepository implements PermissionInterface
 {
@@ -14,26 +17,33 @@ class PermissionRepository implements PermissionInterface
 
     public function index()
     {
-        return Permission::all();
+        $permissions = $this->permission::all();
+        return $permissions;
     }
 
     public function show($id)
     {
-        return Permission::find($id);
+        $permission = $this->permission::find($id);
+        return $permission;
     }
 
     public function store($data)
     {
-        return Permission::create($data);
+        $permission = $this->permission::create($data);
+        return $permission;
     }
 
     public function update($id, $data)
     {
-        return Permission::find($id)->update($data);
+        $permission = $this->permission::find($id);
+        $permission->update($data);
+        return $permission;
     }
 
     public function delete($id)
     {
-        return Permission::find($id)->delete();
+        $permission = $this->permission::find($id);
+        $permission->delete();
+        return $permission;
     }
 }

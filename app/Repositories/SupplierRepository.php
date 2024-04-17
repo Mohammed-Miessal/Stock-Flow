@@ -8,28 +8,43 @@ use App\Interfaces\SupplierInterface;
 
 class SupplierRepository implements SupplierInterface
 {
+    protected $supplier;
+
+    public function __construct(Supplier $supplier)
+    {
+        $this->supplier = $supplier;
+    }
+
     public function index()
     {
-        return Supplier::all();
+        $suppliers = $this->supplier::all();
+        return $suppliers;
+
     }
 
     public function show($id)
     {
-        return Supplier::find($id);
+        $supplier = $this->supplier::find($id);
+        return $supplier;
     }
 
     public function store($data)
     {
-        return Supplier::create($data);
+        $supplier = $this->supplier::create($data);
+        return $supplier;
     }
 
-    public function update($id, $data)
+    public function update($id,$data)
     {
-        return Supplier::find($id)->update($data);
+        $supplier = $this->supplier::find($id);
+        $supplier->update($data);
+        return $supplier;
     }
 
     public function delete($id)
     {
-        return Supplier::find($id)->delete();
+        $supplier = $this->supplier::find($id);
+        $supplier->delete();
+        return $supplier;
     }
 }
