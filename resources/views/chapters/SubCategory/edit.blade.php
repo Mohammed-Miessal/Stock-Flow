@@ -47,7 +47,7 @@
                                                 Code
                                             </span>
 
-                                            <input type="text" required name="subcategory_code" value="subcategory_code"
+                                            <input type="text" required name="subcategory_code" value="{{ $subcategory->subcategory_code }}"
                                                 class="block mt-1 mr-4 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                                 style="width: 80%" />
 
