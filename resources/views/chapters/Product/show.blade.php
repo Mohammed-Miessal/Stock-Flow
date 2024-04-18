@@ -58,7 +58,7 @@
                                     </div>
                                     <div class="flex border-t py-2 border-gray-200 ">
                                         <span class="text-gray-500">Quantity</span>
-                                        <span class="ml-auto text-gray-900 dark:text-gray-400">4</span>
+                                        <span class="ml-auto text-gray-900 dark:text-gray-400">{{ $product->quantity }}</span>
                                     </div>
                                     <div class="flex border-t border-gray-200 py-2">
                                         <span class="text-gray-500">Unit</span>

@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,5 +23,16 @@ class DatabaseSeeder extends Seeder
         $this->call(SupplierSeeder::class);
         // $this->call(ProductSeeder::class);
         $this->call(CustomerSeeder::class);
+
+        // Create a Super Admin
+        $user = User::create([
+            'name' => 'Super Admin',
+            'email' => 'mohammedmiessal@gmail.com',
+            'password' => Hash::make('mohammedmiessal@gmail.com'),
+        ]);
+
+        $user->roles()->sync([1]);
+        $user->permissions()->sync([1,6,10]);
+
     }
 }

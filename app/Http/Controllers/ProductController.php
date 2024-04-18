@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Services\TaxService;
 use App\Services\UnitService;
+use App\Exports\ProductsExport;
 use App\Services\ProductService;
 use App\Services\CategoryService;
 use App\Services\SupplierService;
 use App\Services\SubcategoryService;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
@@ -125,5 +127,15 @@ class ProductController extends Controller
         $this->product->delete($product->id);
         return redirect()->route('product.index');
 
+    }
+
+    public function export() 
+    {
+        return Excel::download(new ProductsExport, 'products.xlsx');
+    }
+
+    public function exportCSV() 
+    {
+        return Excel::download(new ProductsExport, 'products.csv');
     }
 }
