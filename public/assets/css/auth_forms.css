@@ -290,3 +290,7 @@ header img {
 .alert {
   color: red;
 }
+
+.success {
+  color: green;
+}
