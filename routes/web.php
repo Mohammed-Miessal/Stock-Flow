@@ -28,16 +28,10 @@ use App\Http\Controllers\SubcategoryController;
 
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-
-
-
-Route::get('/forget-password', function () {
-    return view('auth.forget-password');
-})->name('forget-password');
-
-Route::get('/reset-password', function () {
-    return view('auth.reset-password');
-})->name('reset-password');
+Route::get('/forget-password', [AuthController::class, 'forgetPassword'])->name('forget-password');
+Route::post('/forget-password', [AuthController::class, 'forgetPasswordPost'])->name('forget-password.post');
+Route::get('/reset-password/{token}', [AuthController::class, 'resetPassword'])->name('reset-password');
+Route::post('/reset-password/{token}', [AuthController::class, 'resetPasswordPost'])->name('reset-password.post');
 
 
 // Route::group(['middleware' => ['role:Super Admin,Admin']], function () {

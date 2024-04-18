@@ -24,4 +24,16 @@ class AuthService{
             $user = $this->auth->logout();
             return $user;
         }
+
+        public function forgetPassword($data)
+        {
+            $user = $this->auth->forgetPassword($data);
+            return $user;
+        }
+
+        public function resetPassword($data)
+        {
+            $user = $this->auth->resetPassword($data);
+            return $user;
+        }
 }
