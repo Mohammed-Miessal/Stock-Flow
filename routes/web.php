@@ -60,5 +60,10 @@ Route::get('/reset-password', function () {
         })->name('home');
     
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+        // Export Excel File
+        Route::get('/export', [ProductController::class, 'export'])->name('export');
+        // Export CSV File
+        Route::get('/export-csv', [ProductController::class, 'exportCSV'])->name('export.csv');
     });
     
