@@ -47,7 +47,7 @@
         </div>
 
 
-        <button type="submit" class="login__button">Login</button>
+        <button type="submit" class="login__button">LOGIN</button>
 
         <!-- <p class="login__register">
                 Don't have an account? <a href="#">Register</a>
