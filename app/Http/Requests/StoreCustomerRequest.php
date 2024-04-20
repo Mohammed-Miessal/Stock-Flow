@@ -26,8 +26,8 @@ class StoreCustomerRequest extends FormRequest
             'email' => 'required|email|unique:customers',
             'phone' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'country' => 'required|string|max:255|unique:customers',
-            'city' => 'required|string|max:255|unique:customers',
+            'country' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
         ];
     }
 }

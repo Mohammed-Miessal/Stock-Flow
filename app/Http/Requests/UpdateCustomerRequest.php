@@ -28,8 +28,8 @@ class UpdateCustomerRequest extends FormRequest
             'email' => 'required|email|unique:customers,email,' . $customerId,
             'phone' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'country' => 'required|string|max:255|unique:customers,country,' . $customerId,
-            'city' => 'required|string|max:255|unique:customers,city,' . $customerId,
+            'country' => 'required|string|max:255' ,
+            'city' => 'required|string|max:255' ,
         ];
     }
 }
