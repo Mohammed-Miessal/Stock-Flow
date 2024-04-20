@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('phone');
             $table->string('address');
             $table->enum('status', ['active', 'inactive']);
-            $table->string('country')->unique()->nullable();
-            $table->string('city')->unique();
+            $table->string('country')->nullable();
+            $table->string('city')->nullable();
             $table->timestamps();
         });
     }

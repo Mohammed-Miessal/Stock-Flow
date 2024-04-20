@@ -29,8 +29,8 @@ class UpdateSupplierRequest extends FormRequest
             'phone' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'status' => 'required|string|in:active,inactive',
-            'country' => 'required|string|max:255|unique:suppliers,country,' . $supplierId,
-            'city' => 'required|string|max:255|unique:suppliers,city,' . $supplierId,
+            'country' => 'required|string|max:255' ,
+            'city' => 'required|string|max:255' ,
         ];
     }
     
