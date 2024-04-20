@@ -25,7 +25,7 @@
                         <article class="overflow-hidden">
                             <div class="bg-[white] rounded-b-md">
 
-                                <div class="p-9">
+                                <div class="px-9 pb-9 mb-4 mt-[-24px]  flex justify-start">
                                     <div class="space-y-6 text-slate-700">
                                         <a class="text-lg dark:text-white " href="#" id='title'>
                                             StockFlow <img src="{{ asset('assets/img/logo_fil_rouge.svg') }}" alt="Logo"
@@ -41,7 +41,9 @@
                                                 <p class="text-sm font-bold text-slate-700 dark:text-white ">
                                                     Order Status:
                                                 </p>
-                                                <p>{{ $order->status }}</p>
+                                                <p>
+                                                    {{ ucfirst($order->status) }}
+                                                </p>
                                             </div>
                                             <div class="text-sm font-light text-slate-500">
                                                 <p class="text-sm font-bold text-slate-700 dark:text-white ">Billed To</p>

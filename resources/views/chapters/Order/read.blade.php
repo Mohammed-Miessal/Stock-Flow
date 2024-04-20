@@ -46,26 +46,29 @@
                                                 {{ $order->uuid }}
                                             </td>
                                             <td class="px-4 py-3 text-sm">
-                                                {{ $order->customer->name}}
+                                                {{ $order->customer->name }}
                                             </td>
                                             <td class="px-4 py-3 text-sm">
                                                 {{ $order->total }}
                                             </td>
                                             <td class="px-4 py-3 text-sm">
-                                                {{ $order->status }}
+                                                <span
+                                                    class="px-4 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                                                    {{ ucfirst($order->status) }}
+                                                </span>
                                             </td>
                                             <td class="px-4 py-3 text-sm">
                                                 {{ $order->date }}
                                             </td>
-                                            
+
                                             <!-- Action -->
                                             <td class="px-4 py-3">
                                                 <div class="flex items-center space-x-4 text-sm">
                                                     {{-- Show --}}
                                                     <a href="{{ route('order.show', $order->id) }}">
                                                         <button
-                                                        class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                                        aria-label="Show">
+                                                            class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                                                            aria-label="Show">
                                                             <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg"
                                                                 viewBox="0 0 24 24" fill="currentColor">
                                                                 <path
@@ -88,14 +91,13 @@
                                                         </button>
                                                     </a>
                                                     {{-- Delete --}}
-                                                    <form action="{{ route('order.destroy', $order->id) }}"
-                                                        method="post">
+                                                    <form action="{{ route('order.destroy', $order->id) }}" method="post">
                                                         @csrf
                                                         @method('DELETE')
 
                                                         <button
-                                                        class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                                        aria-label="Delete">
+                                                            class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                                                            aria-label="Delete">
                                                             <svg class="w-4 h-4" aria-hidden="true" fill="currentColor"
                                                                 viewBox="0 0 20 20">
                                                                 <path fill-rule="evenodd"
@@ -105,7 +107,7 @@
                                                         </button>
 
                                                     </form>
-                                                {{-- </div> --}}
+                                                    {{-- </div> --}}
                                             </td>
                                         </tr>
                                     @endforeach
