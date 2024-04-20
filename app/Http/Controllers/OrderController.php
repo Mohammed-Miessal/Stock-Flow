@@ -41,8 +41,8 @@ class OrderController extends Controller
     {
         $customers = $this->customer->index();
         $products = $this->product->index();
-        
-        // Préparez les prix des produits dans un tableau associatif
+  
+        // Préparez les noms et les prix des produits dans des tableaux associatif
         $productPrices = [];
         $productNames = [];
         foreach ($products as $product) {
@@ -123,7 +123,7 @@ class OrderController extends Controller
     public function update(UpdateOrderRequest $request, Order $order)
     {
             $data = $request->validated();
-
+            
             // Générer un UUID
             $uuid = Uuid::uuid4()->toString();
         

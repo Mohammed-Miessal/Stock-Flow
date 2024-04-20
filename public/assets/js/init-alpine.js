@@ -1,15 +1,16 @@
 function data() {
   function getThemeFromLocalStorage() {
-    // if user already changed the theme, use it
+    // Check if the theme preference is stored in local storage
     if (window.localStorage.getItem('dark')) {
-      return JSON.parse(window.localStorage.getItem('dark'))
+      // If stored, return the stored value
+      return JSON.parse(window.localStorage.getItem('dark'));
+    } else {
+      // If not stored, return the user's system preference
+      return (
+        !!window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+      );
     }
-
-    // else return their preferences
-    return (
-      !!window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-    )
   }
 
   function setThemeToLocalStorage(value) {

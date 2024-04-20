@@ -22,9 +22,9 @@
                 <i class="ri-lock-2-line login__icon"></i>
 
                 <div class="login__box-input">
-                    <input type="password" required class="login__input" id="login-pass" name="password_confirmation">
+                    <input type="password" required class="login__input" id="login-pass2" name="password_confirmation">
                     <label for="login-pass" class="login__label">Confirm Password</label>
-                    <i class="ri-eye-off-line login__eye" id="login-eye"></i>
+                    <i class="ri-eye-off-line login__eye" id="login-eye2"></i>
                 </div>
             </div>
 

@@ -3017,3 +3017,7 @@ Show Page
 .w-9 {
     width: 2.25rem/* 36px */;
 }
+
+.mt-\[-24px\] {
+    margin-top: -24px;
+}

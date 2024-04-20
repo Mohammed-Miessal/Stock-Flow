@@ -279,8 +279,105 @@
     </div>
 
     <script>
+        // Mettre à jour le total affiché
+        function updateTotal() {
+            const totalCellFooter1 = document.querySelector('.total-cell1');
+            const totalCellFooter2 = document.querySelector('.total-cell2');
+            const totalInput = document.querySelector('input[name="total"]');
+            const totalValue = total.reduce((acc, curr) => parseFloat(acc) + parseFloat(curr), 0).toFixed(2);
+            totalInput.value = totalValue;
+            totalCellFooter1.textContent = totalValue + ' DH';
+            totalCellFooter2.textContent = totalValue + ' DH';
+        }
+
+        // Récupérer les prix et les noms des produits depuis le contrôleur
         const productPrices = {!! json_encode($productPrices) !!};
         const productNames = {!! json_encode($productNames) !!};
+
+        let total = [];
+        let productsAdded = [];
+        const productInput = document.getElementById('product-input');
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const addProductBtn = document.querySelector('.add-product-btn');
+
+            addProductBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                // Récupérer les valeurs du produit et les ajouter à la liste des produits
+                const productID = document.getElementById('select-product').value;
+                // Ici je recupere le nom et le prix du produit selectionné
+                const productName = productNames[productID];
+                const price = productPrices[productID];
+                // Ici je recupere la quantité du produit
+                const quantity = document.getElementsByName('quantity')[0].value;
+                const total_price = (quantity * price).toFixed(2);
+                // const productInput = document.getElementById('product-input');
+
+                // Ajouter le prix total du produit à la liste des total[]
+                total.push(total_price);
+                // Ajouter le produit à la liste des produits
+                productsAdded.push({
+                    product_id: productID,
+                    quantity: quantity,
+                    total: total_price
+                });
+
+                // Mettre à jour l'input product-input avec le produit ajouté
+                productInput.value = JSON.stringify(productsAdded);
+
+
+
+                // Ajouter une nouvelle ligne de produit à la table
+                const newRowHtml = `
+                          <tr class="border-b border-slate-200">
+                         <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
+                             <div class="font-medium dark:text-gray-400">${productName}</div>
+                         </td>
+                         <td class="px-3 py-4 text-sm text-right text-slate-500 sm:table-cell">${quantity}</td>
+                         <td class="px-3 py-4 text-sm text-right text-slate-500 sm:table-cell">${price}</td>
+                         <td class="px-3 py-4 text-sm text-right text-slate-500 sm:table-cell"></td>
+                         <td class="py-4 pl-3 pr-4 text-sm text-right text-gray-400 sm:pr-6 md:pr-0">${total_price}</td>
+                         <td class="py-4 pl-3 pr-4 text-sm text-right text-gray-400 sm:pr-6 md:pr-0">
+                             <button class="remove-product-btn text-red-500">Remove</button>
+                         </td>
+                         </tr>
+                 `;
+
+                const productTable = document.querySelector('.product-table');
+                productTable.insertAdjacentHTML('beforeend', newRowHtml);
+
+                // document.getElementById('select-product').value = '';
+                // document.getElementsByName('quantity')[0].value = '';
+
+                updateTotal();
+            });
+
+            // Ajouter un écouteur d'événements de suppression pour le bouton supprimer
+            const productTable = document.querySelector('.product-table');
+            // Supprimer un produit de la liste des produits ajoutés
+            productTable.addEventListener('click', function(event) {
+                if (event.target.classList.contains('remove-product-btn')) {
+                    const button = event.target;
+                    // Récupérer la ligne du produit
+                    const row = button.closest('tr');
+                    // Récupérer l'index de la ligne du produit
+                    const rowIndex = Array.from(productTable.querySelectorAll('tr')).indexOf(row);
+                    // Supprimer le prix total du produit de la liste des total[]
+                    total.splice(rowIndex, 1);
+                    // Supprimer le produit de la liste des produits ajoutés
+                    productsAdded.splice(rowIndex, 1);
+
+                    row.parentNode.removeChild(row);
+
+                    updateTotal();
+
+                    // Mettre à jour la valeur de l'input product-input après avoir supprimé un produit
+                    productInput.value = JSON.stringify(productsAdded);
+                }
+            });
+
+
+        });
     </script>
-    <script src="{{ asset('js/invoice.js') }}"></script>
 @endsection

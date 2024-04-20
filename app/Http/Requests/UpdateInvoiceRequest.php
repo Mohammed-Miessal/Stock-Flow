@@ -23,8 +23,8 @@ class UpdateInvoiceRequest extends FormRequest
     {
         return [
             'customer_id' => 'required|exists:customers,id', // Ensure customer_id is required and exists in the customers table
-            'invoice_date' => 'required|date',
-            'due_date' =>  'required|date',
+            'invoice_date' => 'required|date|after_or_equal:today',
+            'due_date' => 'required|date|after:invoice_date',
             'total' => 'required|numeric|min:0', 
         ];
     }
