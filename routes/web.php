@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaxController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
@@ -11,6 +11,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\SubcategoryController;
 
 /*
@@ -47,6 +49,8 @@ Route::post('/reset-password/{token}', [AuthController::class, 'resetPasswordPos
             'product' => ProductController::class,
             'order' => OrderController::class,
             'invoice' => InvoiceController::class,
+            'role' => RoleController::class,
+            'permission' => PermissionController::class,
         ]);
     
         Route::get('/home', function () {

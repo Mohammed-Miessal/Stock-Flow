@@ -22,7 +22,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        // 
+        $permissions = $this->permission->index();
+        return view('chapters.Permission.read', compact('permissions'));
     }
 
     /**
@@ -30,7 +31,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('chapters.Permission.create');
     }
 
     /**
@@ -38,7 +39,9 @@ class PermissionController extends Controller
      */
     public function store(StorePermissionRequest $request)
     {
-        //
+        $data = $request->validated();
+        $this->permission->store($data);
+        return redirect()->route('permission.index');
     }
 
     /**
@@ -46,7 +49,7 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission)
     {
-        //
+        $this->permission->show($permission->id);
     }
 
     /**
@@ -54,7 +57,8 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
-        //
+        $permission = $this->permission->show($permission->id);
+        return view('chapters.Permission.edit', compact('permission'));
     }
 
     /**
@@ -62,7 +66,9 @@ class PermissionController extends Controller
      */
     public function update(UpdatePermissionRequest $request, Permission $permission)
     {
-        //
+        $data = $request->validated();
+        $this->permission->update($permission->id, $data);
+        return redirect()->route('permission.index');
     }
 
     /**
@@ -70,6 +76,7 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        //
+        $this->permission->delete($permission->id);
+        return redirect()->route('permission.index');
     }
 }
