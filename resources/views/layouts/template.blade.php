@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="assets/img/logo_fil_rouge.svg" type="image/x-icon">
+
     <title>EcoStock</title>
 
     <!--===============  CSS ===============-->
@@ -11,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind.output.css') }}" />
 
     <!--===============  Icons ===============-->
-     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="{{ asset('assets/js/init-alpine.js') }}"></script>
 
     <!--===============  Chart.js ===============-->

@@ -40,7 +40,8 @@ class OrderController extends Controller
     public function create()
     {
         $customers = $this->customer->index();
-        $products = $this->product->index();
+        // $products = $this->product->index();
+        $products = get_active_products();
   
         // Préparez les noms et les prix des produits dans des tableaux associatif
         $productPrices = [];
@@ -104,7 +105,8 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         $customers = $this->customer->index();
-        $products = $this->product->index();
+        // $products = $this->product->index();
+        $products = get_active_products();
         $order = $this->order->show($order->id);
         // Préparez les prix des produits dans un tableau associatif
         $productPrices = [];
