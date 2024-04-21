@@ -3021,3 +3021,26 @@ Show Page
 .mt-\[-24px\] {
     margin-top: -24px;
 }
+
+.w-28 {
+    width: 7rem/* 112px */;
+}
+
+.h-28 {
+    height: 7rem/* 112px */;
+}
+
+@media (prefers-color-scheme: dark) {
+    .dark\:placeholder-gray-400::placeholder {
+        --tw-placeholder-opacity: 1;
+        color: rgb(156 163 175 / var(--tw-placeholder-opacity));
+    }
+}
+
+.pt-12 {
+    padding-top: 3rem/* 48px */;
+}
+
+.rounded-md {
+    border-radius: 0.375rem/* 6px */;
+}

@@ -59,5 +59,8 @@ Route::post('/reset-password/{token}', [AuthController::class, 'resetPasswordPos
         Route::get('/export', [ProductController::class, 'export'])->name('export');
         // Export CSV File
         Route::get('/export-csv', [ProductController::class, 'exportCSV'])->name('export.csv');
+        
+        // Search Products
+        Route::get('/search', [ProductController::class, 'search'])->name('search-products');
     });
     

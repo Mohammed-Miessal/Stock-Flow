@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('content')
-    <div class="flex h-screen bg-gray-50 dark:bg-gray-800" :class="{ 'overflow-hidden': isSideMenuOpen }">
+    <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
 
         @include('components.aside')
 
@@ -12,8 +12,8 @@
                 <div class="container px-6 mx-auto grid">
 
                     <section class="text-gray-600 body-font overflow-hidden ">
-                        <div class="container px-5 py-24 mx-auto">
-                            <div class="lg:w-4/5 mx-auto flex flex-wrap">
+                        <div class="container px-5 py-24 mx-auto ">
+                            <div class="lg:w-4/5 mx-auto flex flex-wrap pt-12 ">
 
                                 <img alt="ecommerce"
                                     class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded "

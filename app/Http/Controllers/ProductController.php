@@ -14,6 +14,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Http\Request;
+
 
 class ProductController extends Controller
 {
@@ -138,4 +140,12 @@ class ProductController extends Controller
     {
         return Excel::download(new ProductsExport, 'products.csv');
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $products = search($search);
+        return response()->json($products);
+    }
+
 }
