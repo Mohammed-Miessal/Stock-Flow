@@ -39,7 +39,8 @@ class InvoiceController extends Controller
     public function create()
     {
         $customers = $this->customer->index();
-        $products = $this->product->index();
+        // $products = $this->product->index();
+        $products = get_active_products();
 
         // Préparez les prix et les noms des produits dans un tableau associatif
         $productPrices = [];
@@ -97,7 +98,8 @@ class InvoiceController extends Controller
     {
         $invoice = $this->invoice->show($invoice->id);
         $customers = $this->customer->index();
-        $products = $this->product->index();
+        // $products = $this->product->index();
+        $products = get_active_products();
         // Préparez les prix des produits dans un tableau associatif
         $productPrices = [];
         $productNames = [];
