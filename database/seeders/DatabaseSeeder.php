@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UnitSeeder::class);
         $this->call(TaxSeeder::class);
         $this->call(SupplierSeeder::class);
-        // $this->call(ProductSeeder::class);
+        $this->call(ProductSeeder::class);
         $this->call(CustomerSeeder::class);
 
         // Create a Super Admin

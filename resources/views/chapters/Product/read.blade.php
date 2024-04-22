@@ -290,6 +290,7 @@
             fetch(`http://127.0.0.1:8000/search/?search=${search}`)
                 .then(response => response.json())
                 .then(function(result) {
+                    container.innerHTML = ""; // clear the container
                     result.forEach((product) => {
                         container.innerHTML +=
                             `

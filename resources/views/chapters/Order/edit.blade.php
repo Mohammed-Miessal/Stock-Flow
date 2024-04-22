@@ -110,7 +110,10 @@
 
 
                                     {{-- Products --}}
-                                    <input type="hidden" id="product-input" name="products" value="[]" />
+                                    {{-- <input type="hidden" id="product-input" name="products" value="[]" /> --}}
+                                    <input type="hidden" id="product-input" name="products"
+                                        value="{{ $orderProductsJson }}" />
+
                                     {{-- / Products --}}
 
                                     <div class="flex mt-6 text-sm col-span-2  mr-5">
@@ -315,64 +318,71 @@
         const productPrices = {!! json_encode($productPrices) !!};
         const productNames = {!! json_encode($productNames) !!};
 
+        // Récupérer les données JSON de l'élément avec l'ID "product-input"
+        let my_selected_products = document.getElementById("product-input").value;
+
+        // Analyser les données JSON en un objet JavaScript
+        let productsObj = JSON.parse(my_selected_products);
+
+        console.log(productsObj);
+
         let total = [];
         let productsAdded = [];
         const productInput = document.getElementById('product-input');
 
 
         document.addEventListener('DOMContentLoaded', function() {
-            const addProductBtn = document.querySelector('.add-product-btn');
+            // Récupérer les données JSON de l'input product-input
+            const productInputValue = document.getElementById('product-input').value;
+            const productsData = JSON.parse(productInputValue);
 
-            addProductBtn.addEventListener('click', function(event) {
-                event.preventDefault();
-                // Récupérer les valeurs du produit et les ajouter à la liste des produits
-                const productID = document.getElementById('select-product').value;
-                // Ici je recupere le nom et le prix du produit selectionné
-                const productName = productNames[productID];
-                const price = productPrices[productID];
-                // Ici je recupere la quantité du produit
-                const quantity = document.getElementsByName('quantity')[0].value;
-                const total_price = (quantity * price).toFixed(2);
-                // const productInput = document.getElementById('product-input');
+            // Fonction pour afficher les produits dans le tableau
+            function displayProducts(data) {
+                const productTable = document.querySelector('.product-table');
 
-                // Ajouter le prix total du produit à la liste des total[]
-                total.push(total_price);
-                // Ajouter le produit à la liste des produits
-                productsAdded.push({
-                    product_id: productID,
-                    quantity: quantity,
-                    total: total_price
+                // Réinitialiser le contenu du tableau
+                productTable.innerHTML = '';
+
+                // Réinitialiser le total
+                total = [];
+
+                // Parcourir chaque produit et les ajouter au tableau
+                data.forEach(product => {
+                    const productName = productNames[product.product_id];
+                    const price = productPrices[product.product_id];
+
+                    // Calculer le total pour chaque produit
+                    const productTotal = (price * product.quantity).toFixed(2);
+                    total.push(productTotal);
+
+                    // Créer une nouvelle ligne de tableau pour chaque produit
+                    const newRowHtml = `
+                    <tr class="border-b border-slate-200">
+                    <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
+                        <div class="font-medium dark:text-gray-400">${productName}</div>
+                    </td>
+                    <td class="px-3 py-4 text-sm text-right text-slate-500 sm:table-cell">${product.quantity}</td>
+                    <td class="px-3 py-4 text-sm text-right text-slate-500 sm:table-cell">${price}</td>
+                    <td class="px-3 py-4 text-sm text-right text-slate-500 sm:table-cell"></td>
+                    <td class="py-4 pl-3 pr-4 text-sm text-right text-gray-400 sm:pr-6 md:pr-0">${productTotal}</td>
+                    <td class="py-4 pl-3 pr-4 text-sm text-right text-gray-400 sm:pr-6 md:pr-0">
+                        <button class="remove-product-btn text-red-500">Remove</button>
+                    </td>
+                    </tr>
+                    `;
+
+                    // Ajouter la nouvelle ligne de produit au tableau
+                    productTable.insertAdjacentHTML('beforeend', newRowHtml);
                 });
 
-                // Mettre à jour l'input product-input avec le produit ajouté
-                productInput.value = JSON.stringify(productsAdded);
-
-
-
-                // Ajouter une nouvelle ligne de produit à la table
-                const newRowHtml = `
-                          <tr class="border-b border-slate-200">
-                         <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                             <div class="font-medium dark:text-gray-400">${productName}</div>
-                         </td>
-                         <td class="px-3 py-4 text-sm text-right text-slate-500 sm:table-cell">${quantity}</td>
-                         <td class="px-3 py-4 text-sm text-right text-slate-500 sm:table-cell">${price}</td>
-                         <td class="px-3 py-4 text-sm text-right text-slate-500 sm:table-cell"></td>
-                         <td class="py-4 pl-3 pr-4 text-sm text-right text-gray-400 sm:pr-6 md:pr-0">${total_price}</td>
-                         <td class="py-4 pl-3 pr-4 text-sm text-right text-gray-400 sm:pr-6 md:pr-0">
-                             <button class="remove-product-btn text-red-500">Remove</button>
-                         </td>
-                         </tr>
-                 `;
-
-                const productTable = document.querySelector('.product-table');
-                productTable.insertAdjacentHTML('beforeend', newRowHtml);
-
-                // document.getElementById('select-product').value = '';
-                // document.getElementsByName('quantity')[0].value = '';
-
+                // Mettre à jour le total
                 updateTotal();
-            });
+            }
+
+            // Afficher les produits une fois que le DOM est chargé
+            displayProducts(productsData);
+
+            // Autres parties de votre code...
 
             // Ajouter un écouteur d'événements de suppression pour le bouton supprimer
             const productTable = document.querySelector('.product-table');
@@ -387,17 +397,75 @@
                     // Supprimer le prix total du produit de la liste des total[]
                     total.splice(rowIndex, 1);
                     // Supprimer le produit de la liste des produits ajoutés
-                    productsAdded.splice(rowIndex, 1);
+                    productsData.splice(rowIndex, 1);
 
                     row.parentNode.removeChild(row);
 
                     updateTotal();
 
                     // Mettre à jour la valeur de l'input product-input après avoir supprimé un produit
-                    productInput.value = JSON.stringify(productsAdded);
+                    productInput.value = JSON.stringify(productsData);
                 }
             });
 
+
+            // Ajouter un produit
+            const addProductBtn = document.querySelector('.add-product-btn');
+
+            addProductBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                // Récupérer les valeurs du produit et les ajouter à la liste des produits
+                const productID = document.getElementById('select-product').value;
+                // Ici je recupere le nom et le prix du produit selectionné
+                const productName = productNames[productID];
+                const price = productPrices[productID];
+                // Ici je recupere la quantité du produit
+                const quantity = document.getElementsByName('quantity')[0].value;
+                const total_price = (quantity * price).toFixed(2);
+
+
+                // Ajouter le prix total du produit à la liste des total[]
+                total.push(total_price);
+                // Ajouter le produit à la liste des produits
+                productsAdded.push({
+                    product_id: productID,
+                    quantity: quantity,
+                    total: total_price
+                });
+
+                // Mettre à jour l'input product-input avec les produits ajoutés
+                productInput.value = JSON.stringify([...JSON.parse(productInput.value), {
+                    product_id: productID,
+                    quantity: quantity,
+                    total: total_price
+                }]);
+
+
+
+                // Ajouter une nouvelle ligne de produit à la table
+                const newRowHtml = `
+                <tr class="border-b border-slate-200">
+                <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
+                    <div class="font-medium dark:text-gray-400">${productName}</div>
+                </td>
+                <td class="px-3 py-4 text-sm text-right text-slate-500 sm:table-cell">${quantity}</td>
+                <td class="px-3 py-4 text-sm text-right text-slate-500 sm:table-cell">${price}</td>
+                <td class="px-3 py-4 text-sm text-right text-slate-500 sm:table-cell"></td>
+                <td class="py-4 pl-3 pr-4 text-sm text-right text-gray-400 sm:pr-6 md:pr-0">${total_price}</td>
+                <td class="py-4 pl-3 pr-4 text-sm text-right text-gray-400 sm:pr-6 md:pr-0">
+                    <button class="remove-product-btn text-red-500">Remove</button>
+                </td>
+                </tr>
+                `;
+
+                const productTable = document.querySelector('.product-table');
+                productTable.insertAdjacentHTML('beforeend', newRowHtml);
+
+                // document.getElementById('select-product').value = '';
+                // document.getElementsByName('quantity')[0].value = '';
+
+                updateTotal();
+            });
 
         });
     </script>
