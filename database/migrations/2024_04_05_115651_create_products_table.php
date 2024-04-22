@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('name')->unique();
             $table->string('reference')->unique();
-            $table->integer('quantity');
+            // $table->integer('quantity');
+            $table->integer('quantity')->unsigned();
             $table->decimal('price', 10, 2);
             $table->enum('status', ['active', 'out of stock','archived','on pre-order'])->default('active');
             $table->integer('critical_stock')->default(0);

@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             Product::create([
                 'image' => $faker->imageUrl(),
                 'name' => 'Product '.$i+1,
