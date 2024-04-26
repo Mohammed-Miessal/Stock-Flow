@@ -17,12 +17,12 @@ class ProductSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 2; $i++) {
             Product::create([
                 'image' => $faker->imageUrl(),
                 'name' => 'Product '.$i+1,
                 'reference' => $faker->unique()->uuid,
-                'quantity' => $faker->numberBetween(1, 100),
+                'quantity' => $faker->numberBetween(100,100),
                 'price' => $faker->randomFloat(2, 1, 1000),
                 'status' => $faker->randomElement(['active', 'out of stock', 'archived', 'on pre-order']),
                 'critical_stock' => $faker->numberBetween(0, 50),

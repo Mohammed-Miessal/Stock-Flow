@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Interfaces\OrderInterface', 'App\Repositories\OrderRepository');
         $this->app->bind('App\Interfaces\InvoiceInterface', 'App\Repositories\InvoiceRepository');
         $this->app->bind('App\Interfaces\AuthInterface', 'App\Repositories\AuthRepository');
-        // Enregistrez votre écouteur d'événements ici
+        // Event
         $this->app->bind('App\Events\ProductUpdated' , 'App\Listeners\UpdateProductStatus');
     }
 

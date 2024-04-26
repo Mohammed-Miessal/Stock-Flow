@@ -185,81 +185,77 @@
                             </table>
                         </div>
                         <!-- Pagination -->
-                        <div
-                            class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+                        {{-- <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
                             <span class="flex items-center col-span-3">
-                                Showing 21-30 of 100
+                                Showing {{ $products->firstItem() }}-{{ $products->lastItem() }} of {{ $products->total() }}
                             </span>
                             <span class="col-span-2"></span>
                             <!-- Pagination -->
                             <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
                                 <nav aria-label="Table navigation">
                                     <ul class="inline-flex items-center">
+                                        <!-- Bouton précédent -->
                                         <li>
-                                            <button
-                                                class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                                                aria-label="Previous">
+                                            @if ($products->onFirstPage())
+                                            <button class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple" aria-label="Previous" disabled>
                                                 <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                    <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path>
                                                 </svg>
                                             </button>
-                                        </li>
-                                        <li>
-                                            <button
-                                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                1
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button
-                                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                2
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button
-                                                class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                3
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button
-                                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                4
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <span class="px-3 py-1">...</span>
-                                        </li>
-                                        <li>
-                                            <button
-                                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                8
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button
-                                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                9
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button
-                                                class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
-                                                aria-label="Next">
+                                            @else
+                                            <a href="{{ $products->appends(request()->query())->previousPageUrl() }}" class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple" aria-label="Previous">
                                                 <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                    <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                </svg>
+                                            </a>
+                                            @endif
+                                        </li>
+                        
+                                        <!-- Liens des pages -->
+                                        @for ($page = 1; $page <= $products->lastPage(); $page++)
+                                        <li>
+                                            <a href="{{ $products->appends(request()->query())->url($page) }}" class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple @if ($page == $products->currentPage()) bg-purple-600 text-white @endif">{{ $page }}</a>
+                                        </li>
+                                        @endfor
+                        
+                                        <!-- Bouton suivant -->
+                                        <li>
+                                            @if ($products->hasMorePages())
+                                            <a href="{{ $products->appends(request()->query())->nextPageUrl() }}" class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple" aria-label="Next">
+                                                <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
+                                                    <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                </svg>
+                                            </a>
+                                            @else
+                                            <button class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple" aria-label="Next" disabled>
+                                                <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
+                                                    <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path>
                                                 </svg>
                                             </button>
+                                            @endif
                                         </li>
                                     </ul>
                                 </nav>
                             </span>
+                        </div> --}}
+
+                        <div
+                            class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+                            <span class="flex items-center col-span-3">
+                                {{-- Showing {{ $products->firstItem() }}-{{ $products->lastItem() }} of {{ $products->total() }} --}}
+                            </span>
+                            <span class="col-span-2"></span>
+                            <!-- Pagination -->
+                            <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                                <nav aria-label="Table navigation">
+                                    <ul class="inline-flex items-center" id="pagination">
+
+                                    </ul>
+                                </nav>
+                            </span>
                         </div>
+
+
                     </div>
                 </div>
             </main>
@@ -270,30 +266,43 @@
         const search = document.getElementById("search");
         const container = document.getElementById("container_products");
         const btn_Search = document.getElementById("Btn_search");
+        let paginate = 1;
+        const pagination = document.getElementById("pagination");
 
 
         btn_Search.addEventListener("click", (event) => {
             event.preventDefault();
+            paginate = 1;
             container.innerHTML = "";
-            load(search.value);
+            load();
         });
 
         search.addEventListener("keyup", (event) => {
             event.preventDefault();
-            const inputValue = search.value;
+            paginate = 1;
             container.innerHTML = "";
-            load(search.value);
-
+            load();
+            const inputValue = search.value;
         });
 
-        function load(search) {
-            fetch(`http://127.0.0.1:8000/search/?search=${search}`)
-                .then(response => response.json())
-                .then(function(result) {
-                    container.innerHTML = ""; // clear the container
-                    result.forEach((product) => {
-                        container.innerHTML +=
-                            `
+        function load() {
+            fetch(`http://127.0.0.1:8000/search/?search=${search.value}&page=${paginate}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(function(responseData) {
+                    console.log(responseData);
+                    if (Array.isArray(responseData.products.data)) {
+
+                        const products = responseData.products.data;
+                        container.innerHTML = ""; // clear the container
+                        if (products.length > 0) {
+                            products.forEach((product) => {
+                                container.innerHTML +=
+                                    `
                         <tr class="text-gray-700 dark:text-gray-400">
                                                 
                             <td class="px-4 py-3 text-sm">
@@ -368,11 +377,89 @@
                                     </form>
                             </td>
                         </tr>
-                    `;
-                    });
+                                    `;
+                            });
+
+
+                            pagination.innerHTML = `
+                            <span class="flex items  ">
+                                Showing ${responseData.products.from}-${responseData.products.to} of ${responseData.products.total}
+                            </span>
+                            
+                            <span class="col-span-2"></span>
+                            <!-- Pagination -->
+                            <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                                <nav aria-label="Table navigation">
+                                    <ul class="inline-flex items-center">
+                                        <!-- Bouton précédent -->
+                                        <li>
+                                            <button
+                                                class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
+                                                aria-label="Previous" onclick="previous()" ${responseData.products.current_page == 1 ? 'disabled' : ''}>
+                                                <svg class="w-4 h-4 fill-current" aria-hidden="true"
+                                                    viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                </svg>
+                                            </button>
+                                        </li>
+                                        
+
+                                        <!-- Bouton suivant -->
+                                        <li>
+                                            <button
+                                                class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
+                                                aria-label="Next" onclick="loadMore()" ${responseData.products.current_page == responseData.products.last_page ? 'disabled' : ''}>
+                                                <svg class="w-4 h-4 fill-current" aria-hidden="true"
+                                                    viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1
+                                                        0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                </svg>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </span>
+ 
+                            `;
+
+
+
+                        } else {
+                            // container.innerHTML = "<p>No products found.</p>";
+                            container.innerHTML = `
+                            <tr class="text-gray-700 dark:text-gray-400">
+                                <td class="px-4 py-3 text-sm" colspan="8">
+                                    No products found.
+                                </td>
+                            </tr>   
+                            `;
+                        }
+                    } else {
+                        container.innerHTML = "<p>Error: Response data is not in the expected format.</p>";
+                        console.error('Server did not return an array of products:', responseData);
+                    }
                 }).catch(error => console.log('error', error));
         }
 
-        load("");
+        function loadMore() {
+            paginate++;
+            load();
+        }
+
+        function previous() {
+            paginate--;
+            load();
+        }
+
+        function changePage(page) {
+            paginate = page;
+            load();
+        }
+
+        load();
     </script>
 @endsection

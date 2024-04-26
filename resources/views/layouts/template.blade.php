@@ -91,7 +91,7 @@
 
         $(document).ready(function() {
             new TomSelect("#role_id", {
-                maxItems: 2,
+                // maxItems: 2,
                 sortField: {
                     field: "text",
                     direction: "asc"

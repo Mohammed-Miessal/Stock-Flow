@@ -31,8 +31,6 @@ class UpdateProductStatus
         
         $product->save();
 
-        // Ajoutez des journaux de débogage pour vérifier si la méthode est appelée
-        logger('Product status updated: ' . $product->status);
     }
     
 }

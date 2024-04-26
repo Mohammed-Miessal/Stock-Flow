@@ -145,7 +145,15 @@ class ProductController extends Controller
     {
         $search = $request->input('search');
         $products = search($search);
-        return response()->json($products);
+        $next = false;
+        $previous = false;
+        if ($products->currentPage() < $products->lastPage()) {
+            $next = true;
+        }
+        if ($products->currentPage() > 1) {
+            $previous = true;
+        }
+        return response()->json(compact('products', 'next', 'previous'));
     }
 
 }

@@ -65,7 +65,7 @@ class TaxController extends Controller
     public function update(UpdateTaxRequest $request, Tax $tax)
     {
         $data = $request->validated();
-        $this->tax->update($data, $tax);
+        $this->tax->update($tax->id,$data );
         return redirect()->route('tax.index');
     }
 
@@ -74,7 +74,7 @@ class TaxController extends Controller
      */
     public function destroy(Tax $tax)
     {
-        $this->tax->delete($tax);
+        $this->tax->delete($tax->id);
         return redirect()->route('tax.index');
     }
 }

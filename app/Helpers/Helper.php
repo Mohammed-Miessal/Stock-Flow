@@ -27,7 +27,7 @@ function search($search)
     }
 
     // Exécuter la requête et récupérer les résultats
-    $products = $query->get();
+    $products = $query->paginate(20);
 
     // Retourner les résultats de la recherche
     return $products;

@@ -13,14 +13,16 @@ class RoleMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next , $role , $permission = null): Response
-    {
-
-        if(!$request->user()->hasRole($role)){
+    public function handle(
+        Request $request,
+        Closure $next,
+        $role,
+        $permission = null
+    ): Response {
+        if (!$request->user()->hasRole($role)) {
             abort(403);
-        }   
-
-        if($permission !== null && !$request->user()->can($permission)){
+        }
+        if ($permission !== null && !$request->user()->can($permission)) {
             abort(403);
         }
 

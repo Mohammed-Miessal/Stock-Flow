@@ -60,19 +60,55 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(StoreOrderRequest $request)
+    // {
+    //     // Valider les données de la requête
+    //     $data = $request->validated();
+
+    //     // Générer un UUID
+    //     $uuid = Uuid::uuid4()->toString();
+        
+    //     // Ajouter l'UUID aux données à insérer
+    //     $data['uuid'] = $uuid;
+        
+    //     // Créer une commande avec les données validées
+    //     $order = $this->order->store($data);
+        
+    //     // Récupérer la chaîne JSON représentant les produits depuis la requête
+    //     $productsJson = $request->input('products');
+        
+    //     // Décoder la chaîne JSON en un tableau associatif
+    //     $productsArray = json_decode($productsJson, true);
+        
+    //     // Parcourir chaque produit et l'attacher à la commande avec la quantité
+    //     foreach ($productsArray as $product) {
+    //     // Ajouter la relation many-to-many entre la commande et le produit avec la quantité
+    //     $order->products()->attach($product['product_id'], ['quantity' => $product['quantity'], 'total_per_product' => $product['total']]);
+        
+    //     // Décrémenter la quantité du produit dans la base de données
+    //     $productModel = $this->product->show($product['product_id']);
+    //     $productModel->quantity -= $product['quantity'];
+    //     $productModel->save();
+
+    //     // Vérifier si la quantité est maintenant zéro et déclencher l'événement pour mettre à jour le statut du produit
+    //     if ($productModel->quantity === 0) {   
+    //         event(new ProductUpdated($productModel)) ;
+    //     }
+    //     }
+        
+    //     // Rediriger vers la page de création de commande
+    //     return redirect()->route('order.index');
+    // }
     public function store(StoreOrderRequest $request)
     {
         // Valider les données de la requête
         $data = $request->validated();
-
+    
         // Générer un UUID
         $uuid = Uuid::uuid4()->toString();
         
         // Ajouter l'UUID aux données à insérer
         $data['uuid'] = $uuid;
-        
-        // Créer une commande avec les données validées
-        $order = $this->order->store($data);
         
         // Récupérer la chaîne JSON représentant les produits depuis la requête
         $productsJson = $request->input('products');
@@ -80,26 +116,56 @@ class OrderController extends Controller
         // Décoder la chaîne JSON en un tableau associatif
         $productsArray = json_decode($productsJson, true);
         
-        // Parcourir chaque produit et l'attacher à la commande avec la quantité
+        // Initialiser une variable pour stocker la quantité totale commandée
+        $totalQuantityOrdered = 0;
+    
+        // Parcourir chaque produit et vérifier la quantité disponible
         foreach ($productsArray as $product) {
-        // Ajouter la relation many-to-many entre la commande et le produit avec la quantité
-        $order->products()->attach($product['product_id'], ['quantity' => $product['quantity'], 'total_per_product' => $product['total']]);
-        
-        // Décrémenter la quantité du produit dans la base de données
-        $productModel = $this->product->show($product['product_id']);
-        $productModel->quantity -= $product['quantity'];
-        $productModel->save();
-
-        // Vérifier si la quantité est maintenant zéro et déclencher l'événement pour mettre à jour le statut du produit
-        if ($productModel->quantity === 0) {   
-            event(new ProductUpdated($productModel)) ;
+            $productId = $product['product_id'];
+            $quantity = $product['quantity'];
+            $productModel = $this->product->show($productId);
+    
+            // Vérifier si la quantité saisie dépasse la quantité disponible
+            if ($productModel->quantity < $quantity) {
+                return redirect()->back()->with('error', 'La quantité saisie pour le produit "'.$productModel->name.'" dépasse la quantité disponible.');
+            }
+    
+            // Ajouter la quantité du produit à la quantité totale commandée
+            $totalQuantityOrdered += $quantity;
         }
+    
+        // Créer une commande avec les données validées après avoir vérifié toutes les quantités
+        $order = $this->order->store($data);
+    
+        // Vérifier si la quantité totale commandée dépasse la quantité disponible pour l'un des produits
+        // if ($totalQuantityOrdered > $availableQuantity) {
+        //     return redirect()->back()->with('error', 'La quantité totale commandée dépasse la quantité disponible en stock.');
+        // }
+    
+        // Parcourir à nouveau chaque produit pour les attacher à la commande avec la quantité
+        foreach ($productsArray as $product) {
+            $productId = $product['product_id'];
+            $quantity = $product['quantity'];
+            $productModel = $this->product->show($productId);
+    
+            // Ajouter la relation many-to-many entre la commande et le produit avec la quantité
+            $order->products()->attach($productId, ['quantity' => $quantity, 'total_per_product' => $product['total']]);
+    
+            // Décrémenter la quantité du produit dans la base de données
+            $productModel->quantity -= $quantity;
+            $productModel->save();
+    
+            // Vérifier si la quantité est maintenant zéro et déclencher l'événement pour mettre à jour le statut du produit
+            if ($productModel->quantity === 0) {   
+                event(new ProductUpdated($productModel));
+            }
         }
         
         // Rediriger vers la page de création de commande
         return redirect()->route('order.index');
     }
     
+
     
     /**
      * Display the specified resource.
@@ -148,70 +214,70 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateOrderRequest $request, Order $order)
-    {
-        $data = $request->validated();
-        
-        // Générer un UUID
-        $uuid = Uuid::uuid4()->toString();
-    
-        // Ajouter l'UUID aux données à insérer
-        $data['uuid'] = $uuid;
-    
-        // Mettre à jour la commande avec les données validées
-        $order->update($data);
-    
-        // Récupérer la chaîne JSON représentant les produits depuis la requête
-        $productsJson = $request->input('products');
-    
-        // Décoder la chaîne JSON en un tableau associatif
-        $productsArray = json_decode($productsJson, true);
-    
-        // Parcourir chaque produit dans les nouveaux produits
-        foreach ($productsArray as $product) {
-            // Récupérer le produit de l'ancienne commande s'il existe
-            $existingProduct = $order->products()->where('product_id', $product['product_id'])->first();
-    
-            if ($existingProduct) {
-                // Comparer les quantités
-                $quantityDifference = $existingProduct->pivot->quantity - $product['quantity'];
-                
-                // Si la quantité dans la nouvelle commande est inférieure à celle de l'ancienne commande
-                if ($quantityDifference > 0) {
-                    // Ajouter la différence à la quantité totale du produit
-                    $existingProduct->quantity += $quantityDifference;
-                    $existingProduct->save();
-                }else{
-                    $difference = abs($quantityDifference);
-                    $existingProduct->quantity -= $difference;
-                    $existingProduct->save();
-                    if ($existingProduct->quantity === 0) {   
-                        event(new ProductUpdated($existingProduct));
-                    }
-                }
-    
-                // Mettre à jour la quantité et le total du produit dans la commande
-                $existingProduct->pivot->quantity = $product['quantity'];
-                $existingProduct->pivot->total_per_product = $product['total'];
-                $existingProduct->pivot->save();
-            } else {
-                // Ajouter le produit à la commande s'il n'existe pas encore
-                $order->products()->attach($product['product_id'], ['quantity' => $product['quantity'], 'total_per_product' => $product['total']]);
-               // Décrémenter la quantité du produit dans la base de données
-                $productModel = Product::findOrFail($product['product_id']);
-                $productModel->quantity -= $product['quantity'];
-                $productModel->save();
 
-               // Vérifier si la quantité est maintenant zéro et déclencher l'événement pour mettre à jour le statut du produit
-                if ($productModel->quantity === 0) {   
-                    event(new ProductUpdated($productModel));
-                }
+    public function update(UpdateOrderRequest $request, Order $order)
+{
+    $data = $request->validated();
+    
+    // Mettre à jour la commande avec les données validées
+    $order->update($data);
+
+    // Récupérer la chaîne JSON représentant les produits depuis la requête
+    $productsJson = $request->input('products');
+
+    // Décoder la chaîne JSON en un tableau associatif
+    $productsArray = json_decode($productsJson, true);
+
+    // Récupérer les IDs des produits de la mise à jour
+    $updatedProductIds = collect($productsArray)->pluck('product_id');
+
+    // Parcourir chaque produit dans la commande existante
+    foreach ($order->products as $existingProduct) {
+        // Vérifier si le produit existe dans la mise à jour
+        if (!in_array($existingProduct->id, $updatedProductIds->toArray())) {
+            // Supprimer le produit de la commande s'il n'existe pas dans la mise à jour
+            $order->products()->detach($existingProduct->id);
+
+            // Rétablir la quantité du produit dans le stock
+            $existingProduct->quantity += $existingProduct->pivot->quantity;
+            $existingProduct->save();
+            
+            // Déclencher l'événement si la quantité est maintenant zéro
+            if ($existingProduct->quantity === 0) {   
+                event(new ProductUpdated($existingProduct));
             }
         }
-    
-        // Rediriger vers la page de création de commande
-        return redirect()->route('order.index');
     }
+
+    // Parcourir chaque produit dans les nouveaux produits
+    foreach ($productsArray as $product) {
+        // Récupérer le produit de l'ancienne commande s'il existe
+        $existingProduct = $order->products()->where('product_id', $product['product_id'])->first();
+
+        if ($existingProduct) {
+            // Mettre à jour la quantité et le total du produit dans la commande
+            $existingProduct->pivot->quantity = $product['quantity'];
+            $existingProduct->pivot->total_per_product = $product['total'];
+            $existingProduct->pivot->save();
+        } else {
+            // Ajouter le produit à la commande s'il n'existe pas encore
+            $order->products()->attach($product['product_id'], ['quantity' => $product['quantity'], 'total_per_product' => $product['total']]);
+            // Décrémenter la quantité du produit dans la base de données
+            $productModel = Product::findOrFail($product['product_id']);
+            $productModel->quantity -= $product['quantity'];
+            $productModel->save();
+
+            // Vérifier si la quantité est maintenant zéro et déclencher l'événement pour mettre à jour le statut du produit
+            if ($productModel->quantity === 0) {   
+                event(new ProductUpdated($productModel));
+            }
+        }
+    }
+
+    // Rediriger vers la page de création de commande
+    return redirect()->route('order.index');
+}
+
     
     /**
      * Remove the specified resource from storage.

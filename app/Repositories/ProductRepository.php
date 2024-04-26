@@ -17,7 +17,8 @@ class ProductRepository implements ProductInterface
 
     public function index()
     {
-        $products = $this->product::all();
+        // $products = $this->product::all();
+        $products = $this->product::paginate(20);
         return $products;
     }
 

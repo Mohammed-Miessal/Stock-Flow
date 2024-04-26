@@ -23,7 +23,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = $this->role->index();
-        return view('roles.index', compact('roles'));
+        return view('chapters.Role.read', compact('roles'));
     }
 
     /**
@@ -31,7 +31,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('chapters.Role.create');
     }
 
     /**
@@ -39,7 +39,9 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
-        //
+        $data = $request->validated();
+        $this->role->store($data);
+        return redirect()->route('role.index');
     }
 
     /**
@@ -47,7 +49,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //
+        $this->role->show($role->id);
     }
 
     /**
@@ -55,7 +57,8 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        $role = $this->role->show($role->id);
+        return view('chapters.Role.edit', compact('role'));
     }
 
     /**
@@ -63,7 +66,9 @@ class RoleController extends Controller
      */
     public function update(UpdateRoleRequest $request, Role $role)
     {
-        //
+        $data = $request->validated();
+        $this->role->update($role->id , $data );
+        return redirect()->route('role.index'); 
     }
 
     /**
@@ -71,6 +76,7 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        $this->role->delete($role->id);
+        return redirect()->route('role.index');
     }
 }
